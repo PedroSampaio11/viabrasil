@@ -1,9 +1,8 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import Link from "next/link"
 import { VehicleCard } from "./vehicle-card"
-import { ChevronDown } from "lucide-react"
+import { LearnMoreButton } from "./learn-more-button"
 import { mapVeiculoToCard, VehicleCardData } from "@/lib/utils/vehicle-mapper"
 import { VeiculoRetornoModel } from "@/lib/types/autocerto"
 
@@ -70,16 +69,9 @@ export function EstoqueSection() {
 
         {/* Botão Ver Mais */}
         <div className="flex justify-center">
-          <Link
-            href="/estoque"
-            className="group flex items-center gap-3 px-8 py-4 bg-white/10 text-white rounded-full font-semibold hover:bg-white/20 transition-all hover:shadow-lg border border-white/20"
-          >
-            Ver mais veículos
-            <div className="flex flex-col gap-0.5">
-              <ChevronDown size={16} className="group-hover:translate-y-0.5 transition-transform" />
-              <ChevronDown size={16} className="group-hover:translate-y-0.5 transition-transform -mt-2" />
-            </div>
-          </Link>
+          <LearnMoreButton href="/estoque" className="learn-more-accent learn-more-wide">
+            Veja nosso estoque
+          </LearnMoreButton>
         </div>
       </div>
     </section>

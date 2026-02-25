@@ -1,12 +1,20 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* Tipografia Via Brasil (referência para outros projetos):
+   Títulos e botões: Archivo Black | Subtítulos e textos: Outfit
+   HTML: <link href="https://fonts.googleapis.com/css?family=Archivo+Black&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+   CSS:  @import url('https://fonts.googleapis.com/css?family=Archivo+Black&family=Outfit:wght@100..900&display=swap');
+*/
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
+  /* Títulos e botões: Archivo Black | Subtítulos e textos: Outfit */
+  --font-sans: var(--font-outfit);
+  --font-heading: var(--font-archivo-black);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -46,6 +54,9 @@
 }
 
 :root {
+  /* Fontes carregadas via <link> no layout (Google Fonts) */
+  --font-archivo-black: "Archivo Black", sans-serif;
+  --font-outfit: "Outfit", sans-serif;
   --radius: 0.625rem;
   --background: oklch(0.08 0.02 250);
   --foreground: oklch(0.985 0 0);
@@ -121,9 +132,148 @@
   body {
     @apply bg-background text-foreground;
   }
+  /* Títulos: Archivo Black */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+  /* Botões: Archivo Black (use class font-heading em botões customizados) */
+  button {
+    font-family: var(--font-heading);
+  }
 }
 
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+}
+
+/* Barra de scroll: trilho escuro, thumb amarelo arredondado */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(234 179 8) #1e293b;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgb(234 179 8);
+  border-radius: 9999px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgb(250 204 21);
+}
+
+/* Learn More button (círculo que expande no hover + seta) – Uiverse.io style */
+.learn-more {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  vertical-align: middle;
+  text-decoration: none;
+  background: transparent;
+  padding: 0;
+  font-size: inherit;
+  font-family: inherit;
+  width: 12rem;
+  height: auto;
+}
+
+.learn-more-circle {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position: relative;
+  display: block;
+  margin: 0;
+  width: 3rem;
+  height: 3rem;
+  background: #282936;
+  border-radius: 1.625rem;
+}
+
+.learn-more-icon {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  background: #000;
+}
+
+.learn-more-arrow {
+  left: 0.625rem;
+  width: 1.125rem;
+  height: 0.125rem;
+  background: transparent !important;
+}
+
+.learn-more-arrow::before {
+  position: absolute;
+  content: "";
+  top: -0.29rem;
+  right: 0.0625rem;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-top: 0.125rem solid #fff;
+  border-right: 0.125rem solid #fff;
+  transform: rotate(45deg);
+}
+
+.learn-more-button-text {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.75rem 0;
+  margin: 0 0 0 1.85rem;
+  color: #282936;
+  font-weight: 700;
+  line-height: 1.6;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.learn-more:hover .learn-more-circle {
+  width: 100%;
+}
+
+.learn-more:hover .learn-more-circle .learn-more-arrow {
+  transform: translate(1rem, 0);
+  background: #000;
+}
+
+.learn-more:hover .learn-more-button-text {
+  color: #000;
+}
+
+/* Versão tema Via Brasil (fundo escuro): círculo âmbar, texto branco → hover texto preto */
+.learn-more.learn-more-accent .learn-more-circle {
+  background: rgb(234 179 8);
+}
+
+.learn-more.learn-more-accent .learn-more-arrow::before {
+  border-top-color: #0a1628;
+  border-right-color: #0a1628;
+}
+
+.learn-more.learn-more-accent .learn-more-button-text {
+  color: #fff;
+}
+
+.learn-more.learn-more-accent:hover .learn-more-button-text {
+  color: #0a1628;
+}
+
+.learn-more.learn-more-wide {
+  width: 20rem;
 }

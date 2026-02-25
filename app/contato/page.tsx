@@ -10,6 +10,7 @@ import {
   Copy,
   Check,
 } from "lucide-react"
+import { WHATSAPP_DISPLAY, WHATSAPP_NUMBER, WHATSAPP_URL } from "@/lib/site-config"
 
 const CONTACT_CARDS = [
   {
@@ -24,8 +25,8 @@ const CONTACT_CARDS = [
   {
     icon: Phone,
     label: "Telefone",
-    value: "(11) 94279-8763",
-    href: "tel:+5511942798763",
+    value: WHATSAPP_DISPLAY,
+    href: `tel:+${WHATSAPP_NUMBER}`,
     colorClass: "text-blue-400",
     bgClass: "bg-blue-500/10 border-blue-500/30",
     iconBg: "bg-blue-500/20",
@@ -46,8 +47,8 @@ const CONTACT_CARDS = [
   {
     icon: MessageCircle,
     label: "WhatsApp",
-    value: "(11) 94279-8763",
-    href: "https://wa.me/5511942798763",
+    value: WHATSAPP_DISPLAY,
+    href: WHATSAPP_URL,
     colorClass: "text-green-400",
     bgClass: "bg-green-500/10 border-green-500/30",
     iconBg: "bg-green-500/20",

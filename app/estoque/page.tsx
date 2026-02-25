@@ -10,6 +10,7 @@ import { VeiculoRetornoModel, MarcaModel, ModeloModel } from "@/lib/types/autoce
 import { SelectSearchable } from "@/components/ui/select-searchable"
 import { Skeleton } from "@/components/ui/skeleton"
 import { VehicleCardSkeleton } from "@/components/vehicle-card-skeleton"
+import { LearnMoreButton } from "@/components/learn-more-button"
 
 interface FilterState {
   marca: string
@@ -487,9 +488,9 @@ export default function EstoquePage() {
 
           {/* Botão Carregar Mais */}
           <div className="flex justify-center">
-            <button className="px-8 py-4 bg-white/10 text-white rounded-full font-semibold hover:bg-white/20 transition-all hover:shadow-lg border border-white/20 text-sm sm:text-base">
-              CARREGAR MAIS VEÍCULOS
-            </button>
+            <LearnMoreButton className="learn-more-accent learn-more-wide">
+              Carregar mais
+            </LearnMoreButton>
           </div>
         </div>
       </section>

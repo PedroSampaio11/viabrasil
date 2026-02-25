@@ -3,6 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Instagram, MessageCircle, ChevronUp } from "lucide-react"
+import { WHATSAPP_DISPLAY, WHATSAPP_URL } from "@/lib/site-config"
 
 export function Footer() {
   const scrollToTop = () => {
@@ -33,7 +34,7 @@ export function Footer() {
               {/* Informações de Contato */}
               <div className="space-y-3 text-sm sm:text-base text-white/80 mb-6">
                 <p className="flex items-center gap-2">
-                  <span>(11) 94279-8763</span>
+                  <span>{WHATSAPP_DISPLAY}</span>
                 </p>
                 <p className="flex items-center gap-2">
                   <span>viabrasil@viabrasilautos.com.br</span>
@@ -58,7 +59,7 @@ export function Footer() {
                   <Instagram className="w-5 h-5 text-white" />
                 </a>
                 <a
-                  href="https://wa.me/5511942798763"
+                  href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:border-green-500 hover:bg-green-500/10 transition-all"

@@ -4,6 +4,13 @@ import Image from "next/image"
 import { useRef, useState } from "react"
 import { motion } from "motion/react"
 import { Plus } from "lucide-react"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 const inputClass =
   "w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/20 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-colors"
@@ -16,6 +23,7 @@ export default function VendaPage() {
     ano: "",
     quilometragem: "",
     valorDesejado: "",
+    tipoVenda: "" as "" | "venda" | "consignado",
     nomeCompleto: "",
     email: "",
     telefone: "",
@@ -121,6 +129,23 @@ export default function VendaPage() {
                     }
                     className={inputClass}
                   />
+                  <Select
+                    value={formState.tipoVenda || undefined}
+                    onValueChange={(value: "venda" | "consignado") =>
+                      setFormState((s) => ({ ...s, tipoVenda: value }))
+                    }
+                  >
+                    <SelectTrigger
+                      className={inputClass}
+                      style={{ height: "auto" }}
+                    >
+                      <SelectValue placeholder="Venda ou Consignado" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="venda">Venda</SelectItem>
+                      <SelectItem value="consignado">Consignado</SelectItem>
+                    </SelectContent>
+                  </Select>
                   <button
                     type="submit"
                     className="w-full px-8 py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-black font-bold text-sm uppercase tracking-wide transition-colors"
