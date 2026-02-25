@@ -24,7 +24,7 @@ export function VehicleCard({
 }: VehicleCardProps) {
   return (
     <Link href={`/estoque/${id}`} className="block">
-      <div className="group relative bg-[#0A1628] rounded-lg overflow-hidden border-2 border-yellow-500/50 hover:border-yellow-500 transition-all duration-300 hover:shadow-2xl hover:shadow-yellow-500/20 cursor-pointer">
+      <div className="group relative bg-[#00020C] rounded-lg overflow-hidden border-2 border-yellow-500/50 hover:border-yellow-500 transition-all duration-300 hover:shadow-2xl hover:shadow-yellow-500/20 cursor-pointer">
         {/* Badge */}
         {badge && (
           <div className="absolute top-4 left-4 z-10 bg-yellow-500 text-black px-3 py-1 rounded-md text-xs font-bold">

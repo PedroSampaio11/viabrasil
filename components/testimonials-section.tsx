@@ -56,7 +56,7 @@ export function TestimonialsSection() {
   }
 
   return (
-    <section className="py-4 sm:py-20 bg-[#0A1628]">
+    <section className="py-4 sm:py-20 bg-[#00020C]">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="mb-12">
@@ -100,7 +100,7 @@ export function TestimonialsSection() {
                   key={testimonial.id}
                   className="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 px-4"
                 >
-                  <div className="bg-[#0A1628] border-2 border-white/10 rounded-[22px] overflow-hidden hover:border-yellow-500/50 transition-all">
+                  <div className="bg-[#00020C] border-2 border-white/10 rounded-[22px] overflow-hidden hover:border-yellow-500/50 transition-all">
                     {/* Image */}
                     <div className="relative h-64 md:h-80 overflow-hidden">
                       <Image

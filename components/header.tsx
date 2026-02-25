@@ -12,7 +12,7 @@ import {
 export function Header() {
   return (
     <>
-      <header className="w-full bg-[#0A1628] border-b border-blue-900/20 relative z-50">
+      <header className="w-full bg-[#00020C] border-b border-blue-900/20 relative z-50">
         <div className="container mx-auto px-4">
           <div className="flex items-center py-4 justify-between">
             {/* Menu Esquerdo - Desktop */}
@@ -93,7 +93,7 @@ export function Header() {
                   <Menu size={24} />
                 </button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-[#0A1628] border-l border-blue-900/20">
+              <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-[#00020C] border-l border-blue-900/20">
                 <nav className="space-y-4 mt-8">
                   {/* Busca */}
                   <button className="w-full flex items-center gap-3 text-white/90 hover:text-white transition-colors text-left py-3 border-b border-white/10">

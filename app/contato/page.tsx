@@ -80,7 +80,7 @@ export default function ContatoPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#0A1628] text-white">
+    <main className="min-h-screen bg-[#00020C] text-white">
       {/* Hero – igual à home */}
       <section className="relative h-[300px] sm:h-[500px] w-full overflow-hidden">
         <div className="absolute inset-0">
@@ -102,7 +102,7 @@ export default function ContatoPage() {
             Fale com a Via Brasil
           </h1>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0A1628] to-transparent pointer-events-none" />
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#00020C] to-transparent pointer-events-none" />
       </section>
 
       {/* Form + Contact cards – alinhado ao título, mais largo */}
@@ -118,7 +118,7 @@ export default function ContatoPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
         >
-          <div className="rounded-2xl bg-[#0A1628]/95 backdrop-blur border border-white/5 p-10 sm:p-12 lg:p-16 xl:p-20">
+          <div className="rounded-2xl bg-[#00020C]/95 backdrop-blur border border-white/5 p-10 sm:p-12 lg:p-16 xl:p-20">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 xl:gap-32">
               {/* Formulário */}
               <form onSubmit={handleSubmit} className="space-y-6">

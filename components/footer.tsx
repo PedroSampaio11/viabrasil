@@ -11,9 +11,9 @@ export function Footer() {
   }
 
   return (
-    <footer className="bg-[#0A1628] text-white">
+    <footer className="bg-[#00020C] text-white">
       {/* Linha decorativa no topo */}
-      <div className="h-1 bg-gradient-to-r from-blue-600 via-green-500 to-yellow-500" />
+      <div className="h-1 bg-gradient-to-r from-[#034EA2] via-[#00AA56] to-[#FFCC00]" />
 
       <div className="w-full px-4 py-12">
         <div className="max-w-7xl mx-auto">

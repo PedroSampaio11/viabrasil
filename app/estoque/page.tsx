@@ -250,8 +250,8 @@ export default function EstoquePage() {
   const hasActiveFilters = Object.values(filters).some((value) => value !== "")
 
   return (
-    <div className="min-h-screen bg-[#0A1628]">
-      <section className="py-8 sm:py-12 bg-[#0A1628]">
+    <div className="min-h-screen bg-[#00020C]">
+      <section className="py-8 sm:py-12 bg-[#00020C]">
         <div className="container mx-auto px-4">
           {/* Título */}
           <div className="mb-8">

@@ -68,7 +68,7 @@ export function VehicleInterestForm({ codigoVeiculo }: VehicleInterestFormProps)
   }
 
   return (
-    <section className="py-4 sm:py-20 bg-[#0A1628]">
+    <section className="py-4 sm:py-20 bg-[#00020C]">
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto">
           {/* Header */}
@@ -204,7 +204,7 @@ export function VehicleInterestForm({ codigoVeiculo }: VehicleInterestFormProps)
               <button
                 type="submit"
                 disabled={loading}
-                className="px-8 py-3 md:px-12 md:py-4 bg-yellow-500 hover:bg-yellow-600 disabled:opacity-50 disabled:cursor-not-allowed text-[#0A1628] rounded-[22px] font-black text-lg sm:text-xl md:text-2xl transition-colors shadow-lg shadow-yellow-500/20 flex items-center gap-2"
+                className="px-8 py-3 md:px-12 md:py-4 bg-yellow-500 hover:bg-yellow-600 disabled:opacity-50 disabled:cursor-not-allowed text-[#00020C] rounded-[22px] font-black text-lg sm:text-xl md:text-2xl transition-colors shadow-lg shadow-yellow-500/20 flex items-center gap-2"
               >
                 {loading && <Loader2 className="w-5 h-5 animate-spin" />}
                 {loading ? "ENVIANDO..." : "ENVIAR"}

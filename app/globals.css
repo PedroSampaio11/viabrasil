@@ -12,6 +12,13 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  /* CTA e destaques: amarelo da paleta */
+  --color-yellow-500: var(--vb-yellow);
+  --color-yellow-400: #ffd633;
+  --color-amber-500: var(--vb-yellow);
+  --color-amber-400: #ffd633;
+  /* Subtítulos e texto de apoio */
+  --color-vb-subtitles: var(--vb-subtitles);
   /* Títulos e botões: Archivo Black | Subtítulos e textos: Outfit */
   --font-sans: var(--font-outfit);
   --font-heading: var(--font-archivo-black);
@@ -57,9 +64,16 @@
   /* Fontes carregadas via <link> no layout (Google Fonts) */
   --font-archivo-black: "Archivo Black", sans-serif;
   --font-outfit: "Outfit", sans-serif;
+  /* Paleta Via Brasil – alto contraste e CTAs destacados */
+  --vb-background: #00020c;
+  --vb-foreground: #f1f5f9;
+  --vb-subtitles: #cbd5e1;
+  --vb-yellow: #ffcc00;
+  --vb-blue: #034ea2;
+  --vb-green: #00aa56;
   --radius: 0.625rem;
-  --background: oklch(0.08 0.02 250);
-  --foreground: oklch(0.985 0 0);
+  --background: var(--vb-background);
+  --foreground: var(--vb-foreground);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
@@ -150,7 +164,7 @@ html {
 /* Barra de scroll: trilho escuro, thumb amarelo arredondado */
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgb(234 179 8) #1e293b;
+  scrollbar-color: var(--vb-yellow) #1e293b;
 }
 
 *::-webkit-scrollbar {
@@ -163,12 +177,12 @@ html {
 }
 
 *::-webkit-scrollbar-thumb {
-  background: rgb(234 179 8);
+  background: var(--vb-yellow);
   border-radius: 9999px;
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background: rgb(250 204 21);
+  background: #ffd633;
 }
 
 /* Learn More button (círculo que expande no hover + seta) – Uiverse.io style */
@@ -258,12 +272,12 @@ html {
 
 /* Versão tema Via Brasil (fundo escuro): círculo âmbar, texto branco → hover texto preto */
 .learn-more.learn-more-accent .learn-more-circle {
-  background: rgb(234 179 8);
+  background: var(--vb-yellow);
 }
 
 .learn-more.learn-more-accent .learn-more-arrow::before {
-  border-top-color: #0a1628;
-  border-right-color: #0a1628;
+  border-top-color: var(--vb-background);
+  border-right-color: var(--vb-background);
 }
 
 .learn-more.learn-more-accent .learn-more-button-text {
@@ -271,7 +285,7 @@ html {
 }
 
 .learn-more.learn-more-accent:hover .learn-more-button-text {
-  color: #0a1628;
+  color: var(--vb-background);
 }
 
 .learn-more.learn-more-wide {

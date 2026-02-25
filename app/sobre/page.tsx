@@ -218,7 +218,7 @@ export default function SobrePage() {
   }, [])
 
   return (
-    <main className="min-h-screen bg-[#0A1628] text-white">
+    <main className="min-h-screen bg-[#00020C] text-white">
       {/* Hero */}
       <section className="relative h-[420px] sm:h-[500px] w-full overflow-hidden">
         <div className="absolute inset-0">
@@ -247,7 +247,7 @@ export default function SobrePage() {
             </p>
           </div>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#0A1628] to-transparent pointer-events-none" />
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#00020C] to-transparent pointer-events-none" />
       </section>
 
       {/* Timeline – janela fixa à esquerda, foto dinâmica à direita */}
@@ -300,7 +300,7 @@ export default function SobrePage() {
               <div
                 className="pointer-events-none absolute left-0 right-0 top-0 z-10 h-16 sm:h-24"
                 style={{
-                  background: "linear-gradient(to bottom, #0A1628 0%, transparent 100%)",
+                  background: "linear-gradient(to bottom, #00020C 0%, transparent 100%)",
                 }}
                 aria-hidden
               />
@@ -325,7 +325,7 @@ export default function SobrePage() {
               <div
                 className="pointer-events-none absolute bottom-0 left-0 right-0 z-10 h-16 sm:h-24"
                 style={{
-                  background: "linear-gradient(to top, #0A1628 0%, transparent 100%)",
+                  background: "linear-gradient(to top, #00020C 0%, transparent 100%)",
                 }}
                 aria-hidden
               />
@@ -335,7 +335,7 @@ export default function SobrePage() {
       </section>
 
       {/* Missão, Visão, Valores + Vídeo */}
-      <section className="py-16 md:py-24 bg-[#0A1628]">
+      <section className="py-16 md:py-24 bg-[#00020C]">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
             <div className="space-y-6">

@@ -23,10 +23,10 @@ export function QualitySection() {
   ]
 
   return (
-    <section className="relative min-h-[700px] w-full bg-[#0A1628]">
+    <section className="relative min-h-[700px] w-full bg-[#00020C]">
       <div className="absolute inset-0 flex">
         {/* Lado esquerdo - gradiente escuro */}
-        <div className="flex-1 bg-gradient-to-r from-[#0A1628] via-[#0A1628]/90 to-transparent" />
+        <div className="flex-1 bg-gradient-to-r from-[#00020C] via-[#00020C]/90 to-transparent" />
 
         {/* Lado direito - imagem com border-radius */}
         <div className="w-full md:w-1/2 h-[600px] lg:w-2/5 relative overflow-hidden rounded-r-[22px] relative sm:right-20">
@@ -40,7 +40,7 @@ export function QualitySection() {
           <div className="absolute inset-0 bg-gradient-to-l from-black/60 to-transparent" />
         </div>
       </div>
-      <div className="absolute inset-0 bg-gradient-to-r from-[#0A1628] via-[#0A1628]/90 to-transparent pointer-events-none z-0" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#00020C] via-[#00020C]/90 to-transparent pointer-events-none z-0" />
       {/* Content */}
       <div className="relative container mx-auto px-4 py-20">
         <div className="max-w-2xl">
@@ -70,7 +70,7 @@ export function QualitySection() {
       </div>
 
       {/* Bottom Features Strip */}
-      <div className="relative border-t-4 border-yellow-500 bg-[#0A1628]/95 backdrop-blur-sm">
+      <div className="relative border-t-4 border-yellow-500 bg-[#00020C]/95 backdrop-blur-sm">
         <div className="container mx-auto px-4 py-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature, index) => {
@@ -94,7 +94,7 @@ export function QualitySection() {
       </div>
 
       {/* Decorative gradient bottom */}
-      <div className="absolute hidden sm:block bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0A1628] to-transparent pointer-events-none" />
+      <div className="absolute hidden sm:block bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#00020C] to-transparent pointer-events-none" />
     </section>
   )
 }

@@ -32,7 +32,7 @@ export function EstoqueSection() {
   }, [])
 
   return (
-    <section className="py-4 sm:py-20 bg-[#0A1628]">
+    <section className="py-4 sm:py-20 bg-[#00020C]">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="mb-12">
@@ -55,7 +55,7 @@ export function EstoqueSection() {
             {[1, 2, 3].map((i) => (
               <div
                 key={i}
-                className="bg-[#0A1628] rounded-lg border-2 border-yellow-500/50 h-[500px] animate-pulse"
+                className="bg-[#00020C] rounded-lg border-2 border-yellow-500/50 h-[500px] animate-pulse"
               />
             ))}
           </div>

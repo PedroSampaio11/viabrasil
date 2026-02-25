@@ -41,7 +41,7 @@ export default function VendaPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#0A1628] text-white">
+    <main className="min-h-screen bg-[#00020C] text-white">
       {/* Hero – mesmo modelo do contato */}
       <section className="relative h-[300px] sm:h-[600px] w-full overflow-hidden">
         <div className="absolute inset-0">
@@ -62,7 +62,7 @@ export default function VendaPage() {
             Vender meu Carro
           </h1>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0A1628] to-transparent pointer-events-none" />
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#00020C] to-transparent pointer-events-none" />
       </section>
 
       {/* Form – alinhado ao título, borda em gradiente */}
@@ -78,7 +78,7 @@ export default function VendaPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
         >
-          <div className="rounded-2xl bg-[#0A1628]/95 backdrop-blur border border-white/5 p-10 sm:p-12 lg:p-16 xl:p-20">
+          <div className="rounded-2xl bg-[#00020C]/95 backdrop-blur border border-white/5 p-10 sm:p-12 lg:p-16 xl:p-20">
             <form onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 xl:gap-32">
                 {/* Coluna esquerda: Dados do Veículo */}

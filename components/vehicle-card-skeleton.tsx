@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 export function VehicleCardSkeleton() {
   return (
-    <div className="relative bg-[#0A1628] rounded-lg overflow-hidden border-2 border-yellow-500/30">
+    <div className="relative bg-[#00020C] rounded-lg overflow-hidden border-2 border-yellow-500/30">
       {/* Badge Skeleton */}
       <div className="absolute top-4 left-4 z-10">
         <Skeleton className="h-6 w-16" />
