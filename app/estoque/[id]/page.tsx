@@ -7,6 +7,7 @@ import { VehicleCard } from "@/components/vehicle-card"
 import { VehicleInterestForm } from "@/components/vehicle-interest-form"
 import { ChevronLeft, ChevronRight, ArrowRight, Loader2 } from "lucide-react"
 import { mapVeiculoToCard, mapVeiculoToDetail, VehicleDetailData, VehicleCardData } from "@/lib/utils/vehicle-mapper"
+import { getWhatsAppUrl } from "@/lib/utils/whatsapp"
 import { VeiculoRetornoModel } from "@/lib/types/autocerto"
 
 export default function VehicleDetailPage({ params }: { params: Promise<{ id: string }> }) {
@@ -100,6 +101,22 @@ export default function VehicleDetailPage({ params }: { params: Promise<{ id: st
     )
   }
 
+  const whatsappMessage = [
+    "Olá! Tenho interesse no veículo:",
+    "",
+    `*${vehicleData.brand} ${vehicleData.model}*`,
+    `Ano: ${vehicleData.year} | Km: ${vehicleData.km}`,
+    `Preço: ${vehicleData.price}`,
+    `Versão: ${vehicleData.version} | Combustível: ${vehicleData.fuel} | Câmbio: ${vehicleData.transmission}`,
+    "",
+    "Gostaria de mais informações ou agendar uma visita.",
+  ].join("\n")
+
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? ""
+  const fullMessage = baseUrl
+    ? `${whatsappMessage}\n\nLink do anúncio: ${baseUrl}/estoque/${id}`
+    : whatsappMessage
+
   return (
     <div className="min-h-screen bg-[#00020C]">
       <section className="py-8 sm:py-12 bg-[#00020C]">
@@ -161,13 +178,16 @@ export default function VehicleDetailPage({ params }: { params: Promise<{ id: st
                 </div>
               </div>
 
-              {/* Botão CTA */}
-              <Link
-                href="/contato"
+              {/* Botão CTA - abre WhatsApp com mensagem formatada */}
+              <a
+                href={getWhatsAppUrl(fullMessage)}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Abrir WhatsApp para solicitar contato sobre este veículo"
                 className="inline-flex items-center justify-center w-full sm:w-auto px-8 py-4 bg-yellow-500 hover:bg-yellow-600 text-black rounded-[22px] font-bold text-lg sm:text-xl transition-all shadow-lg shadow-yellow-500/30 hover:shadow-xl hover:shadow-yellow-500/40"
               >
                 SOLICITAR CONTATO
-              </Link>
+              </a>
             </div>
 
             {/* Coluna Direita - Galeria */}
