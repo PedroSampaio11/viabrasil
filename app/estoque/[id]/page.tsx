@@ -105,9 +105,8 @@ export default function VehicleDetailPage({ params }: { params: Promise<{ id: st
     "Olá! Tenho interesse no veículo:",
     "",
     `*${vehicleData.brand} ${vehicleData.model}*`,
-    `Ano: ${vehicleData.year} | Km: ${vehicleData.km}`,
-    `Preço: ${vehicleData.price}`,
-    `Versão: ${vehicleData.version} | Combustível: ${vehicleData.fuel} | Câmbio: ${vehicleData.transmission}`,
+    `Ano: ${vehicleData.year}`,
+    `Versão: ${vehicleData.version} `,
     "",
     "Gostaria de mais informações ou agendar uma visita.",
   ].join("\n")
