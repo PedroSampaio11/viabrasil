@@ -291,3 +291,22 @@ html {
 .learn-more.learn-more-wide {
   width: 20rem;
 }
+
+/* Marquee (testimonials) – animação horizontal */
+@keyframes marquee-x {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-1 * var(--marquee-size) - var(--marquee-gap, 1rem))); }
+}
+@keyframes marquee-x-reverse {
+  0% { transform: translateX(calc(-1 * var(--marquee-size) - var(--marquee-gap, 1rem))); }
+  100% { transform: translateX(0); }
+}
+.marquee-animate-x {
+  animation: marquee-x var(--marquee-duration, 30s) linear infinite;
+}
+.marquee-animate-x-reverse {
+  animation: marquee-x-reverse var(--marquee-duration, 30s) linear infinite;
+}
+.marquee-paused {
+  animation-play-state: paused;
+}
