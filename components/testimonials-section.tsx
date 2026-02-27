@@ -31,14 +31,31 @@ const REVIEWS: { name: string; body: string }[] = [
   },
 ]
 
+const StarIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="#FBBF24"
+    className="h-5 w-5 shrink-0 sm:h-6 sm:w-6"
+    aria-hidden
+  >
+    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+  </svg>
+)
+
 function ReviewCard({ name, body }: { name: string; body: string }) {
   return (
     <figure
       className={cn(
-        "h-full w-72 shrink-0 overflow-hidden rounded-xl border p-6 sm:w-96",
+        "relative h-full w-72 shrink-0 overflow-hidden rounded-xl border p-6 sm:w-96",
         "border-white/10 bg-white/5 text-white transition-all duration-300 hover:bg-white/10"
       )}
     >
+      <div className="absolute right-3 top-3 flex gap-0.5" aria-label="5 estrelas">
+        {[1, 2, 3, 4, 5].map((i) => (
+          <StarIcon key={i} />
+        ))}
+      </div>
       <figcaption className="text-sm font-semibold text-[#F1F5F9]">
         {name}
       </figcaption>

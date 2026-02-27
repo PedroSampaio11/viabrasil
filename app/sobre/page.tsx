@@ -226,6 +226,7 @@ export default function SobrePage() {
             src="/images/via-brasil-home.png"
             alt="Via Brasil Showroom"
             fill
+            quality={100}
             className="object-cover"
             priority
           />
