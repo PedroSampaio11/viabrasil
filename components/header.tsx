@@ -1,15 +1,45 @@
 "use client"
 
+import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 import { Search, Menu } from "lucide-react"
 import {
   Sheet,
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
 
 export function Header() {
+  const router = useRouter()
+  const [searchOpen, setSearchOpen] = useState(false)
+  const [searchTerm, setSearchTerm] = useState("")
+  const [sheetOpen, setSheetOpen] = useState(false)
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    const term = searchTerm.trim()
+    setSearchOpen(false)
+    setSearchTerm("")
+    if (term) {
+      router.push(`/estoque?q=${encodeURIComponent(term)}`)
+    } else {
+      router.push("/estoque")
+    }
+  }
+
+  const openSearch = () => {
+    setSheetOpen(false)
+    setSearchOpen(true)
+  }
+
   return (
     <>
       <header className="w-full bg-[#00020C] border-b border-blue-900/20 relative z-50">
@@ -17,7 +47,12 @@ export function Header() {
           <div className="flex items-center py-4 justify-between">
             {/* Menu Esquerdo - Desktop */}
             <nav className="hidden md:flex items-center gap-8">
-              <button className="text-white/90 hover:text-white transition-colors">
+              <button
+                type="button"
+                onClick={() => setSearchOpen(true)}
+                className="text-white/90 hover:text-white transition-colors"
+                aria-label="Buscar veículos no estoque"
+              >
                 <Search size={20} />
               </button>
               <Link
@@ -84,7 +119,7 @@ export function Header() {
             </div>
 
             {/* Menu Mobile com Sheet */}
-            <Sheet>
+            <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
               <SheetTrigger asChild>
                 <button
                   className="md:hidden text-white/90 hover:text-white transition-colors p-2"
@@ -96,7 +131,11 @@ export function Header() {
               <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-[#00020C] border-l border-blue-900/20">
                 <nav className="space-y-4 mt-8">
                   {/* Busca */}
-                  <button className="w-full flex items-center gap-3 text-white/90 hover:text-white transition-colors text-left py-3 border-b border-white/10">
+                  <button
+                    type="button"
+                    onClick={openSearch}
+                    className="w-full flex items-center gap-3 text-white/90 hover:text-white transition-colors text-left py-3 border-b border-white/10"
+                  >
                     <Search size={20} />
                     <span className="text-sm font-medium">Buscar</span>
                   </button>
@@ -139,6 +178,33 @@ export function Header() {
           </div>
         </div>
       </header>
+
+      {/* Dialog de busca – lupa */}
+      <Dialog open={searchOpen} onOpenChange={setSearchOpen}>
+        <DialogContent className="sm:max-w-md border-white/20 bg-[#00020C]">
+          <DialogHeader>
+            <DialogTitle>Buscar veículos</DialogTitle>
+          </DialogHeader>
+          <form onSubmit={handleSearchSubmit} className="space-y-4">
+            <input
+              type="search"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Marca, modelo ou ano (ex.: Jetta 2020)"
+              className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/20 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-yellow-500/50 focus:border-yellow-500"
+              autoFocus
+              autoComplete="off"
+            />
+            <button
+              type="submit"
+              className="w-full py-3 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-black font-bold text-sm uppercase tracking-wide transition-colors flex items-center justify-center gap-2"
+            >
+              <Search size={18} />
+              Ir para estoque
+            </button>
+          </form>
+        </DialogContent>
+      </Dialog>
     </>
   )
 }

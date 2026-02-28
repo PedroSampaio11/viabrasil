@@ -247,7 +247,7 @@ export default function ContatoPage() {
                     )}
                   </button>
                 </div>
-                <div className="w-full sm:w-56 h-36 rounded-xl overflow-hidden border border-white/20 flex-shrink-0">
+                <div className="w-full sm:w-56 h-36 rounded-xl overflow-hidden border border-white/20 flex-shrink-0 [&>iframe]:invert [&>iframe]:hue-rotate-[180deg] [&>iframe]:brightness-95 [&>iframe]:contrast-90">
                   <iframe
                     src={MAPS_EMBED}
                     width="100%"

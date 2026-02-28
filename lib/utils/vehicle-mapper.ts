@@ -7,7 +7,8 @@ export interface VehicleCardData {
   year: string
   price: string
   imageUrl: string
-  badge?: string
+  /** Quilometragem no badge (ex.: "0km", "76.000km") – sempre preenchido pelo mapper */
+  badge: string
   isNew: boolean
 }
 
@@ -42,13 +43,14 @@ export function formatPrice(preco: number): string {
 }
 
 /**
- * Formata quilometragem
+ * Formata quilometragem para exibição (normalizado: "0 km", "76.000 km")
  */
 export function formatKm(km: number, zeroKm: boolean): string {
-  if (zeroKm) {
-    return "0km"
+  if (zeroKm || km === 0) {
+    return "0 km"
   }
-  return `${new Intl.NumberFormat("pt-BR").format(km)}km`
+  const num = new Intl.NumberFormat("pt-BR", { maximumFractionDigits: 0 }).format(km)
+  return `${num} km`
 }
 
 /**
@@ -88,6 +90,9 @@ export function getVehicleImages(fotos: FotoRetornoModel[]): string[] {
  * Mapeia VeiculoRetornoModel para VehicleCardData
  */
 export function mapVeiculoToCard(veiculo: VeiculoRetornoModel): VehicleCardData {
+  const kmNum = typeof veiculo.Km === "number" ? veiculo.Km : Number(veiculo.Km) || 0
+  const zeroKm = Boolean(veiculo.ZeroKm)
+  const kmDisplay = formatKm(kmNum, zeroKm)
   return {
     id: veiculo.Codigo.toString(),
     brand: veiculo.Marca,
@@ -95,8 +100,8 @@ export function mapVeiculoToCard(veiculo: VeiculoRetornoModel): VehicleCardData 
     year: formatYear(veiculo.AnoFabricacao, veiculo.AnoModelo),
     price: formatPrice(veiculo.Preco || veiculo.PrecoClassificados || 0),
     imageUrl: getVehicleImage(veiculo.Fotos || []),
-    badge: veiculo.ZeroKm ? "0km" : undefined,
-    isNew: veiculo.ZeroKm || false,
+    badge: kmDisplay,
+    isNew: veiculo.ZeroKm ?? false,
   }
 }
 

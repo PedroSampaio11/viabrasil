@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useSearchParams } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { VehicleCard } from "@/components/vehicle-card"
 import { VehicleInterestForm } from "@/components/vehicle-interest-form"
@@ -26,7 +27,8 @@ interface SearchFormData {
 }
 
 export default function EstoquePage() {
-  const { register, handleSubmit, watch, reset } = useForm<SearchFormData>({
+  const searchParams = useSearchParams()
+  const { register, handleSubmit, watch, reset, setValue } = useForm<SearchFormData>({
     defaultValues: {
       searchQuery: "",
     },
@@ -53,6 +55,15 @@ export default function EstoquePage() {
     precoDe: "",
     precoAte: "",
   })
+
+  // Busca vinda do header (/?q=termo)
+  useEffect(() => {
+    const q = searchParams.get("q")
+    if (q) {
+      setValue("searchQuery", q)
+      setActiveSearchQuery(q)
+    }
+  }, [searchParams, setValue])
 
   // Buscar marcas
   useEffect(() => {

@@ -7,7 +7,8 @@ interface VehicleCardProps {
   year: string
   price: string
   imageUrl: string
-  badge?: string
+  /** Quilometragem (ex.: "0km", "76.000km") – vindo do mapper */
+  badge: string
   isNew?: boolean
   id?: string
 }
@@ -18,19 +19,17 @@ export function VehicleCard({
   year,
   price,
   imageUrl,
-  badge = "0km",
+  badge,
   isNew = true,
   id = "1",
 }: VehicleCardProps) {
   return (
     <Link href={`/estoque/${id}`} className="block">
       <div className="group relative bg-[#00020C] rounded-lg overflow-hidden border-2 border-white/10 hover:border-yellow-500/40 transition-all duration-300 hover:shadow-lg hover:shadow-black/30 cursor-pointer">
-        {/* Badge */}
-        {badge && (
-          <div className="absolute top-4 left-4 z-10 bg-yellow-500 text-black px-3 py-1 rounded-md text-xs font-bold">
-            {badge}
-          </div>
-        )}
+        {/* Badge km na foto – sempre exibido (0km ou valor) */}
+        <div className="absolute top-4 left-4 z-10 bg-yellow-500/90 backdrop-blur-sm text-black px-3 py-1.5 rounded-md text-xs font-bold border border-yellow-400/30 shadow-sm">
+          {badge || "—"}
+        </div>
 
         {/* Image */}
         <div className="relative h-[320px] bg-gradient-to-b from-gray-800 to-gray-900 overflow-hidden">

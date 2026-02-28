@@ -13,7 +13,7 @@ export function Footer() {
   return (
     <footer className="bg-[#00020C] text-white">
       {/* Linha decorativa no topo */}
-      <div className="h-1 bg-gradient-to-r from-[#034EA2] via-[#00AA56] to-[#FFCC00]" />
+      <div className="h-px bg-gradient-to-r from-[#034EA2] via-[#00AA56] to-[#FFCC00]" />
 
       <div className="w-full px-4 py-12">
         <div className="max-w-7xl mx-auto">
@@ -81,8 +81,8 @@ export function Footer() {
                 <ChevronUp className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
               </button>
 
-              {/* Mapa - Ocupa todo o espaço disponível */}
-              <div className="w-full h-[300px] md:h-[300px] rounded-[22px] overflow-hidden border border-white/10">
+              {/* Mapa - modo escuro via filtro CSS */}
+              <div className="w-full h-[300px] md:h-[300px] rounded-[22px] overflow-hidden border border-white/10 [&>iframe]:invert [&>iframe]:hue-rotate-[180deg] [&>iframe]:brightness-95 [&>iframe]:contrast-90">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.5!2d-46.414!3d-23.71!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce8b8b8b8b8b8b%3A0x8b8b8b8b8b8b8b8b!2sAv.%20Pref.%20Vald%C3%ADrio%20Prisco%2C%20396%20-%20Centro%2C%20Ribeir%C3%A3o%20Pires%20-%20SP%2C%2009400-005!5e0!3m2!1spt-BR!2sbr!4v1234567890123!5m2!1spt-BR!2sbr"
                   width="100%"
