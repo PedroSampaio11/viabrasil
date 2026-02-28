@@ -224,10 +224,10 @@ export default function ContatoPage() {
               </div>
             </div>
 
-            {/* Endereço + mapa – separado por borda, ícone de copiar ao lado */}
+            {/* Endereço + mapa – lado a lado, mapa maior */}
             <div className="mt-12 pt-8 border-t border-white/10">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
-                <div className="flex items-start gap-3">
+              <div className="flex flex-col lg:flex-row lg:items-stretch gap-6">
+                <div className="flex items-start gap-3 lg:min-w-0 lg:flex-1 lg:max-w-md">
                   <div>
                     <p className="font-bold text-white mb-1">Endereço</p>
                     <p className="text-white/80 text-sm sm:text-base">
@@ -237,7 +237,7 @@ export default function ContatoPage() {
                   <button
                     type="button"
                     onClick={copyAddress}
-                    className="flex-shrink-0 p-2 rounded-lg border border-white/20 hover:bg-white/10 transition-colors text-white/70 hover:text-white"
+                    className="flex-shrink-0 p-2 rounded-lg border border-white/20 hover:bg-white/10 transition-colors text-white/70 hover:text-white cursor-pointer"
                     aria-label="Copiar endereço"
                   >
                     {copied ? (
@@ -247,17 +247,17 @@ export default function ContatoPage() {
                     )}
                   </button>
                 </div>
-                <div className="w-full sm:w-56 h-36 rounded-xl overflow-hidden border border-white/20 flex-shrink-0 [&>iframe]:invert [&>iframe]:hue-rotate-[180deg] [&>iframe]:brightness-95 [&>iframe]:contrast-90">
+                <div className="relative w-full lg:flex-1 min-h-[220px] sm:min-h-[280px] lg:min-h-[260px] rounded-xl overflow-hidden border border-white/20 [&>iframe]:invert [&>iframe]:hue-rotate-[180deg] [&>iframe]:brightness-95 [&>iframe]:contrast-90">
                   <iframe
                     src={MAPS_EMBED}
                     width="100%"
                     height="100%"
-                    style={{ border: 0 }}
+                    style={{ border: 0, minHeight: "220px" }}
                     allowFullScreen
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
                     title="Localização Via Brasil Automóveis"
-                    className="w-full h-full"
+                    className="absolute inset-0 w-full h-full"
                   />
                 </div>
               </div>

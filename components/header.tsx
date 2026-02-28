@@ -63,7 +63,7 @@ export function Header() {
               <button
                 type="button"
                 onClick={() => setSearchOpen(true)}
-                className="text-white/90 hover:text-white transition-colors"
+                className="text-white/90 hover:text-white cursor-pointer transition-colors"
                 aria-label="Buscar veículos no estoque"
               >
                 <Search size={20} />
