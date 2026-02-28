@@ -7,7 +7,6 @@ import {
   Target,
   Eye,
   Heart,
-  Play,
   Users,
 } from "lucide-react"
 
@@ -103,7 +102,10 @@ function TimelineItem({
       className="flex flex-col gap-4 transition-colors duration-300"
     >
       <span
-        className={`font-bold text-sm transition-colors ${isActive ? "text-emerald-400" : "text-white/50"}`}
+        className={`inline-block w-fit rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-colors ${isActive
+          ? "border-white/20 bg-white/10 text-[#CBD5E1]"
+          : "border-white/10 bg-white/5 text-white/50"
+          }`}
       >
         {item.year}
       </span>
@@ -296,7 +298,10 @@ export default function SobrePage() {
             </ul>
           </div>
           <div className="sticky top-7 flex items-center sm:h-[660px] sm:w-full lg:top-8">
-            <div className="relative w-full py-8 sm:py-12">
+            <div
+              className="relative w-full py-8 sm:py-12 transition-transform duration-150 ease-out"
+              style={{ transform: `translateY(-${scrollProgress * 48}px)` }}
+            >
               {/* Gradiente no topo – conteúdo sumindo para cima */}
               <div
                 className="pointer-events-none absolute left-0 right-0 top-0 z-10 h-16 sm:h-24"
@@ -367,20 +372,21 @@ export default function SobrePage() {
               })}
             </div>
             <motion.div
-              className="relative aspect-video rounded-xl bg-white/10 border border-white/10 flex items-center justify-center overflow-hidden"
+              className="relative aspect-video rounded-xl bg-black border border-white/10 overflow-hidden"
               initial={{ opacity: 0, scale: 0.98 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.5 }}
             >
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center">
-                  <Play className="w-8 h-8 text-white/80 ml-1" />
-                </div>
-              </div>
-              <span className="absolute bottom-4 left-4 right-4 text-center text-sm text-white/50">
-                Vídeo em looping da loja
-              </span>
+              <video
+                src="/video/viabrasil.mp4"
+                className="absolute inset-0 w-full h-full object-cover"
+                autoPlay
+                loop
+                muted
+                playsInline
+                aria-label="Vídeo da loja Via Brasil"
+              />
             </motion.div>
           </div>
         </div>
