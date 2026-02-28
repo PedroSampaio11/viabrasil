@@ -5,13 +5,12 @@ import { useSearchParams } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { VehicleCard } from "@/components/vehicle-card"
 import { VehicleInterestForm } from "@/components/vehicle-interest-form"
-import { Search, Filter, X } from "lucide-react"
+import { Search, Filter, X, ChevronLeft, ChevronRight } from "lucide-react"
 import { mapVeiculoToCard, VehicleCardData } from "@/lib/utils/vehicle-mapper"
 import { VeiculoRetornoModel, MarcaModel, ModeloModel } from "@/lib/types/autocerto"
 import { SelectSearchable } from "@/components/ui/select-searchable"
 import { Skeleton } from "@/components/ui/skeleton"
 import { VehicleCardSkeleton } from "@/components/vehicle-card-skeleton"
-import { LearnMoreButton } from "@/components/learn-more-button"
 
 interface FilterState {
   marca: string
@@ -55,6 +54,17 @@ export default function EstoquePage() {
     precoDe: "",
     precoAte: "",
   })
+
+  const PAGE_SIZE = 12
+  const [currentPage, setCurrentPage] = useState(1)
+  const totalPages = Math.max(1, Math.ceil(vehicles.length / PAGE_SIZE))
+  const safePage = Math.min(Math.max(1, currentPage), totalPages)
+  const paginatedVehicles = vehicles.slice(
+    (safePage - 1) * PAGE_SIZE,
+    safePage * PAGE_SIZE
+  )
+  const from = vehicles.length === 0 ? 0 : (safePage - 1) * PAGE_SIZE + 1
+  const to = Math.min(safePage * PAGE_SIZE, vehicles.length)
 
   // Busca vinda do header (/?q=termo)
   useEffect(() => {
@@ -159,9 +169,11 @@ export default function EstoquePage() {
           })
           const mappedVehicles = filtered.map(mapVeiculoToCard)
           setVehicles(mappedVehicles)
+          setCurrentPage(1)
         } else {
           const mappedVehicles = data.map(mapVeiculoToCard)
           setVehicles(mappedVehicles)
+          setCurrentPage(1)
         }
       } catch (err) {
         console.error("Erro ao buscar veículos:", err)
@@ -180,6 +192,7 @@ export default function EstoquePage() {
     if (!activeSearchQuery.trim()) {
       const mappedVehicles = allVehicles.map(mapVeiculoToCard)
       setVehicles(mappedVehicles)
+      setCurrentPage(1)
       setSearching(false)
       return
     }
@@ -218,6 +231,7 @@ export default function EstoquePage() {
 
       setTimeout(() => {
         setVehicles(mappedVehicles)
+        setCurrentPage(1)
         setSearching(false)
       }, remainingTime)
     }, 0)
@@ -290,7 +304,7 @@ export default function EstoquePage() {
               {/* Botão Buscar */}
               <button
                 type="submit"
-                className="flex items-center gap-1 sm:gap-2 px-3 sm:px-6 md:px-8 py-2 sm:py-4 bg-yellow-500 hover:bg-yellow-600 text-black rounded-[22px] font-bold text-xs sm:text-sm md:text-base transition-all shadow-lg shadow-yellow-500/30 hover:shadow-xl hover:shadow-yellow-500/40 whitespace-nowrap flex-shrink-0"
+                className="flex items-center gap-1 sm:gap-2 px-3 sm:px-6 md:px-8 py-2 sm:py-4 bg-yellow-500 hover:bg-yellow-400/95 text-black rounded-[22px] font-bold text-xs sm:text-sm md:text-base transition-colors duration-200 whitespace-nowrap flex-shrink-0 cursor-pointer"
               >
                 <Search className="w-4 h-4 sm:w-5 sm:h-5" />
                 <span className="hidden sm:inline">Buscar</span>
@@ -300,7 +314,7 @@ export default function EstoquePage() {
               <button
                 type="button"
                 onClick={() => setShowFilters(!showFilters)}
-                className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full border flex items-center justify-center transition-all flex-shrink-0 ${hasActiveFilters
+                className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full border flex items-center justify-center transition-all flex-shrink-0 cursor-pointer ${hasActiveFilters
                   ? "bg-yellow-500/20 border-yellow-500 hover:bg-yellow-500/30"
                   : "bg-white/7 border-white/20 hover:border-yellow-500 hover:bg-white/10"
                   }`}
@@ -317,7 +331,7 @@ export default function EstoquePage() {
                     clearSearch()
                     clearFilters()
                   }}
-                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/7 border border-white/20 flex items-center justify-center hover:border-red-500 hover:bg-red-500/10 transition-all flex-shrink-0"
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/7 border border-white/20 flex items-center justify-center hover:border-red-500 hover:bg-red-500/10 transition-all flex-shrink-0 cursor-pointer"
                   aria-label="Limpar busca e filtros"
                 >
                   <X className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
@@ -483,11 +497,68 @@ export default function EstoquePage() {
                   </p>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-                  {vehicles.map((vehicle) => (
-                    <VehicleCard key={vehicle.id} {...vehicle} />
-                  ))}
-                </div>
+                <>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    {paginatedVehicles.map((vehicle) => (
+                      <VehicleCard key={vehicle.id} {...vehicle} />
+                    ))}
+                  </div>
+
+                  {/* Paginação */}
+                  {vehicles.length > PAGE_SIZE && (
+                    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-12">
+                      <p className="text-white/60 text-sm order-2 sm:order-1">
+                        Mostrando {from} a {to} de {vehicles.length} veículos
+                      </p>
+                      <div className="flex items-center gap-1 order-1 sm:order-2">
+                        <button
+                          type="button"
+                          onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                          disabled={safePage <= 1}
+                          className="p-2 rounded-lg bg-white/10 border border-white/20 text-white hover:bg-white/20 disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer"
+                          aria-label="Página anterior"
+                        >
+                          <ChevronLeft className="w-5 h-5" />
+                        </button>
+                        <div className="flex items-center gap-1 px-2">
+                          {Array.from({ length: totalPages }, (_, i) => i + 1)
+                            .filter((p) => {
+                              if (totalPages <= 7) return true
+                              if (p === 1 || p === totalPages) return true
+                              if (Math.abs(p - safePage) <= 1) return true
+                              return false
+                            })
+                            .map((p, i, arr) => (
+                              <span key={p}>
+                                {i > 0 && arr[i - 1] !== p - 1 && (
+                                  <span className="px-1 text-white/40">…</span>
+                                )}
+                                <button
+                                  type="button"
+                                  onClick={() => setCurrentPage(p)}
+                                  className={`min-w-[2.25rem] h-9 px-2 rounded-lg text-sm font-medium transition-colors cursor-pointer ${p === safePage
+                                    ? "bg-yellow-500 text-black"
+                                    : "bg-white/10 border border-white/20 text-white hover:bg-white/20"
+                                    }`}
+                                >
+                                  {p}
+                                </button>
+                              </span>
+                            ))}
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                          disabled={safePage >= totalPages}
+                          className="p-2 rounded-lg bg-white/10 border border-white/20 text-white hover:bg-white/20 disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer"
+                          aria-label="Próxima página"
+                        >
+                          <ChevronRight className="w-5 h-5" />
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </>
               )}
             </>
           )}
@@ -495,13 +566,6 @@ export default function EstoquePage() {
           {/* Formulário de Interesse */}
           <div className="mb-12">
             <VehicleInterestForm />
-          </div>
-
-          {/* Botão Carregar Mais */}
-          <div className="flex justify-center">
-            <LearnMoreButton className="learn-more-accent learn-more-wide">
-              Carregar mais
-            </LearnMoreButton>
           </div>
         </div>
       </section>
