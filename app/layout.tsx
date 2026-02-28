@@ -23,6 +23,7 @@ export default function RootLayout({
       </head>
       <body className="antialiased font-sans">
         <Header />
+        <div className="h-[72px]" aria-hidden="true" />
         {children}
         <Footer />
       </body>

@@ -27,7 +27,7 @@ export function VehicleCard({
     <Link href={`/estoque/${id}`} className="block">
       <div className="group relative bg-[#00020C] rounded-lg overflow-hidden border-2 border-white/10 hover:border-yellow-500/40 transition-all duration-300 hover:shadow-lg hover:shadow-black/30 cursor-pointer">
         {/* Badge km na foto – sempre exibido (0km ou valor) */}
-        <div className="absolute top-4 left-4 z-10 bg-yellow-500/90 backdrop-blur-sm text-black px-3 py-1.5 rounded-md text-xs font-bold border border-yellow-400/30 shadow-sm">
+        <div className="absolute top-4 left-4 z-10 bg-yellow-500/20 backdrop-blur-xl border border-yellow-400/30 text-yellow-300 px-3 py-1.5 rounded-lg  font-bold shadow-lg shadow-black/30">
           {badge || "—"}
         </div>
 
