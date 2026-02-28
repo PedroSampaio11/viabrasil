@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image"
+import { motion } from "motion/react"
 import { Check, Shield, TrendingUp, ShoppingCart, Car } from "lucide-react"
 import { Marquee } from "@/components/ui/marquee"
 import { cn } from "@/lib/utils"
@@ -56,24 +57,39 @@ export function HeroSection() {
       <div className="relative z-10 flex h-full flex-col justify-between">
         <div className="container mx-auto flex flex-1 flex-col justify-center px-4">
           <div className="max-w-2xl pt-20">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+            <motion.h1
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight"
+              initial={{ opacity: 0, y: 28 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            >
               Tradição em realizar sonhos
-            </h1>
-            <p className="text-base sm:text-lg md:text-xl text-white/90 mb-8 leading-relaxed">
+            </motion.h1>
+            <motion.p
+              className="text-base sm:text-lg md:text-xl text-white/90 mb-8 leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            >
               Mais de 30 anos de história em Ribeirão Preto. Veículos
               periciados, revisados e com garantia de procedência.
-            </p>
+            </motion.p>
           </div>
         </div>
 
         {/* Badges carousel - full width de ponta a ponta */}
-        <div className="relative z-10 w-full overflow-hidden pb-20 sm:pb-20">
+        <motion.div
+          className="relative z-10 w-full overflow-hidden pb-20 sm:pb-20"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        >
           <Marquee speed={35} pauseOnHover gap="1rem" className="w-full py-4">
             {badges.map((badge, index) => (
               <BadgeCard key={index} icon={badge.icon} text={badge.text} />
             ))}
           </Marquee>
-        </div>
+        </motion.div>
       </div>
 
       {/* Decorative element - bottom fade */}

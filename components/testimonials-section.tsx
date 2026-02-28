@@ -68,16 +68,20 @@ function ReviewCard({ name, body }: { name: string; body: string }) {
 
 export function TestimonialsSection() {
   return (
-    <section
+    <motion.section
       id="depoimentos"
       className="relative w-full scroll-mt-24 bg-[#00020C] py-12 sm:py-20"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, amount: 0.08 }}
+      transition={{ duration: 0.5 }}
     >
       <div className="container relative z-10 mx-auto px-4">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ amount: 0.2, once: true }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="mb-10 flex flex-col items-center gap-4 text-center"
         >
           <span className="inline-block rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-[#CBD5E1]">
@@ -92,7 +96,13 @@ export function TestimonialsSection() {
           </p>
         </motion.div>
 
-        <div className="relative overflow-hidden">
+        <motion.div
+          className="relative overflow-hidden"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ amount: 0.15, once: true }}
+          transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+        >
           <Marquee speed={40} pauseOnHover gap="1.25rem" className="py-4">
             {REVIEWS.map((review, i) => (
               <ReviewCard key={`top-${i}`} {...review} />
@@ -107,8 +117,8 @@ export function TestimonialsSection() {
 
           <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-[#00020C] to-transparent sm:w-24" />
           <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-[#00020C] to-transparent sm:w-24" />
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   )
 }

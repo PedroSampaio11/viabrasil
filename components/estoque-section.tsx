@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { motion } from "motion/react"
 import { VehicleCard } from "./vehicle-card"
 import { LearnMoreButton } from "./learn-more-button"
 import { mapVeiculoToCard, VehicleCardData } from "@/lib/utils/vehicle-mapper"
@@ -32,15 +33,27 @@ export function EstoqueSection() {
   }, [])
 
   return (
-    <section className="py-4 sm:py-20 bg-[#00020C]">
+    <motion.section
+      className="py-4 sm:py-20 bg-[#00020C]"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, amount: 0.12 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="mb-12">
+        <motion.div
+          className="mb-12"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        >
           <div className="mb-4">
-          <span className="inline-block rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-[#CBD5E1]">
-            Estoque
-          </span>
-        </div>
+            <span className="inline-block rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-[#CBD5E1]">
+              Estoque
+            </span>
+          </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
             Mova Sua Paixão
           </h2>
@@ -49,7 +62,7 @@ export function EstoqueSection() {
             O propósito da Via Brasil é ser a melhor escolha em automóveis para
             seus clientes e fazer parte dos momentos especiais da sua vida
           </p>
-        </div>
+        </motion.div>
 
         {/* Grid de Veículos */}
         {loading ? (
@@ -63,20 +76,34 @@ export function EstoqueSection() {
           </div>
         ) : vehicles.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {vehicles.map((vehicle) => (
-              <VehicleCard key={vehicle.id} {...vehicle} />
+            {vehicles.map((vehicle, i) => (
+              <motion.div
+                key={vehicle.id}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ duration: 0.45, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <VehicleCard {...vehicle} />
+              </motion.div>
             ))}
           </div>
         ) : null}
 
         {/* Botão Ver Mais */}
-        <div className="flex justify-center">
+        <motion.div
+          className="flex justify-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        >
           <LearnMoreButton href="/estoque" className="learn-more-accent learn-more-wide">
             Veja nosso estoque
           </LearnMoreButton>
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   )
 }
 

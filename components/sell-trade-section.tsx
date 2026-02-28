@@ -1,9 +1,18 @@
+"use client"
+
 import Image from "next/image"
+import { motion } from "motion/react"
 import { AccentCtaButton } from "./accent-cta-button"
 
 export function SellTradeSection() {
   return (
-    <section className="relative min-h-[400px] sm:min-h-[600px] w-full overflow-hidden">
+    <motion.section
+      className="relative min-h-[400px] sm:min-h-[600px] w-full overflow-hidden"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.5 }}
+    >
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
@@ -19,7 +28,13 @@ export function SellTradeSection() {
 
       {/* Content – z-index acima do gradiente decorativo */}
       <div className="relative z-10 container mx-auto px-4 py-20">
-        <div className="max-w-2xl">
+        <motion.div
+          className="max-w-2xl"
+          initial={{ opacity: 0, y: 32 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+        >
           {/* Badge */}
           <div className="mb-6">
             <span className="inline-block rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-[#CBD5E1]">
@@ -41,12 +56,12 @@ export function SellTradeSection() {
           <AccentCtaButton href="/venda" ariaLabel="Cotar meu veículo">
             Cotar agora
           </AccentCtaButton>
-        </div>
+        </motion.div>
       </div>
 
       {/* Decorative gradient bottom */}
       <div className="absolute hidden sm:block bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#00020C] to-transparent" />
-    </section>
+    </motion.section>
   )
 }
 
