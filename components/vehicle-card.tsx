@@ -24,7 +24,7 @@ export function VehicleCard({
 }: VehicleCardProps) {
   return (
     <Link href={`/estoque/${id}`} className="block">
-      <div className="group relative bg-[#00020C] rounded-lg overflow-hidden border-2 border-yellow-500/50 hover:border-yellow-500 transition-all duration-300 hover:shadow-2xl hover:shadow-yellow-500/20 cursor-pointer">
+      <div className="group relative bg-[#00020C] rounded-lg overflow-hidden border-2 border-white/10 hover:border-yellow-500/40 transition-all duration-300 hover:shadow-lg hover:shadow-black/30 cursor-pointer">
         {/* Badge */}
         {badge && (
           <div className="absolute top-4 left-4 z-10 bg-yellow-500 text-black px-3 py-1 rounded-md text-xs font-bold">
@@ -38,7 +38,7 @@ export function VehicleCard({
             src={imageUrl}
             alt={`${brand} ${model}`}
             fill
-            className="object-contain p-4 group-hover:scale-110 transition-transform duration-500"
+            className="object-cover group-hover:scale-105 transition-transform duration-500"
           />
         </div>
 
@@ -70,8 +70,8 @@ export function VehicleCard({
           )}
         </div>
 
-        {/* Hover effect overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-yellow-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+        {/* Hover effect overlay - discreto */}
+        <div className="absolute inset-0 bg-gradient-to-t from-yellow-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
       </div>
     </Link>
   )

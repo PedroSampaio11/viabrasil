@@ -234,8 +234,8 @@ export default function SobrePage() {
         </div>
         <div className="relative container mx-auto px-4 h-full flex flex-col justify-center">
           <div className="max-w-2xl">
-            <span className="inline-block px-4 py-2 bg-[#3B4055] text-white text-xs sm:text-sm font-semibold rounded-[11px] mb-4 border border-[#3B4055]/50">
-              SOBRE NÓS
+            <span className="inline-block rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-[#CBD5E1] mb-4">
+              Sobre nós
             </span>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
               30 Anos de Excelência.
@@ -396,8 +396,8 @@ export default function SobrePage() {
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5 }}
           >
-            <span className="inline-block px-4 py-2 bg-[#3B4055] text-white text-xs sm:text-sm font-semibold rounded-[11px] mb-4 border border-[#3B4055]/50">
-              NOSSO TIME
+            <span className="inline-block rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-[#CBD5E1] mb-4">
+              Nosso time
             </span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
               Quem Faz Acontecer.

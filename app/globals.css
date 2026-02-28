@@ -292,6 +292,18 @@ html {
   width: 20rem;
 }
 
+/* Variante: estilo final já aplicado (como se tivesse passado o hover) */
+.learn-more.learn-more-expanded .learn-more-circle {
+  width: 100%;
+}
+.learn-more.learn-more-expanded .learn-more-circle .learn-more-arrow {
+  transform: translate(1rem, 0);
+  background: #000;
+}
+.learn-more.learn-more-expanded.learn-more-accent .learn-more-button-text {
+  color: var(--vb-background);
+}
+
 /* Marquee (testimonials) – animação horizontal */
 @keyframes marquee-x {
   0% { transform: translateX(0); }

@@ -36,9 +36,11 @@ export function EstoqueSection() {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="mb-12">
-          <div className="inline-block px-4 py-1 bg-yellow-500 text-black text-sm font-semibold rounded-full mb-4">
-            ESTOQUE
-          </div>
+          <div className="mb-4">
+          <span className="inline-block rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-[#CBD5E1]">
+            Estoque
+          </span>
+        </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
             Mova Sua Paixão
           </h2>

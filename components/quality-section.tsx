@@ -1,6 +1,6 @@
 import Image from "next/image"
-import Link from "next/link"
 import { Heart, Shield, Car, Headphones } from "lucide-react"
+import { AccentCtaButton } from "./accent-cta-button"
 
 export function QualitySection() {
   const features = [
@@ -45,8 +45,10 @@ export function QualitySection() {
       <div className="relative container mx-auto px-4 py-20">
         <div className="max-w-2xl">
           {/* Badge */}
-          <div className="inline-block px-4 py-2 bg-[#3B4055] text-white text-sm font-semibold rounded-[11px] mb-6 border border-[#3B4055]/50">
-            SOBRE
+          <div className="mb-6">
+            <span className="inline-block rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-[#CBD5E1]">
+              Sobre
+            </span>
           </div>
 
           {/* Title */}
@@ -60,12 +62,9 @@ export function QualitySection() {
           </p>
 
           {/* CTA Button */}
-          <Link
-            href="/sobre"
-            className="inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-yellow-500 hover:bg-yellow-600 text-black rounded-[27px] font-bold text-base md:text-xl transition-all shadow-lg shadow-yellow-500/30 hover:shadow-xl hover:shadow-yellow-500/40"
-          >
-            SAIBA MAIS
-          </Link>
+          <AccentCtaButton href="/sobre" ariaLabel="Saiba mais sobre a Via Brasil">
+            Saiba mais
+          </AccentCtaButton>
         </div>
       </div>
 

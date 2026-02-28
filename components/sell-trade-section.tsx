@@ -1,5 +1,5 @@
 import Image from "next/image"
-import Link from "next/link"
+import { AccentCtaButton } from "./accent-cta-button"
 
 export function SellTradeSection() {
   return (
@@ -17,12 +17,14 @@ export function SellTradeSection() {
         <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/50" />
       </div>
 
-      {/* Content */}
-      <div className="relative container mx-auto px-4 py-20">
+      {/* Content – z-index acima do gradiente decorativo */}
+      <div className="relative z-10 container mx-auto px-4 py-20">
         <div className="max-w-2xl">
           {/* Badge */}
-          <div className="inline-block px-4 py-2 bg-[#3B4055] text-white text-sm font-semibold rounded-[11px] mb-6 border border-[#3B4055]/50">
-            VENDA OU TROCA
+          <div className="mb-6">
+            <span className="inline-block rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-[#CBD5E1]">
+              Venda ou troca
+            </span>
           </div>
 
           {/* Title */}
@@ -35,16 +37,10 @@ export function SellTradeSection() {
             Escolha o modelo ideal para o seu estilo de vida. O propósito da Via Brasil é ser a melhor escolha em automóveis para seus clientes e fazer parte dos momentos especiais da sua vida
           </p>
 
-          {/* CTA Button */}
-          <Link
-            href="/cotar"
-            className="inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-yellow-500 hover:bg-yellow-600 text-black rounded-[27px] font-bold text-base md:text-xl transition-all shadow-lg shadow-yellow-500/30 hover:shadow-xl hover:shadow-yellow-500/40 group"
-          >
-            COTAR AGORA
-            <span className="group-hover:translate-x-1 transition-transform">
-              →
-            </span>
-          </Link>
+          {/* CTA Button – componente próprio */}
+          <AccentCtaButton href="/venda" ariaLabel="Cotar meu veículo">
+            Cotar agora
+          </AccentCtaButton>
         </div>
       </div>
 

@@ -1,15 +1,41 @@
+"use client"
+
 import Image from "next/image"
 import { Check, Shield, TrendingUp, ShoppingCart, Car } from "lucide-react"
+import { Marquee } from "@/components/ui/marquee"
+import { cn } from "@/lib/utils"
+
+const badges = [
+  { icon: TrendingUp, text: "INOVAÇÃO" },
+  { icon: Check, text: "100% PERICIADOS" },
+  { icon: Shield, text: "30 ANOS DE ESTRADA" },
+  { icon: ShoppingCart, text: "COMPRA SEGURA" },
+  { icon: Car, text: "+100K VEÍCULOS VENDIDOS" },
+]
+
+function BadgeCard({
+  icon: Icon,
+  text,
+}: {
+  icon: React.ComponentType<{ size?: number; className?: string }>
+  text: string
+}) {
+  return (
+    <div
+      className={cn(
+        "flex shrink-0 items-center gap-3 rounded-xl border px-5 py-3",
+        "border-white/10 bg-white/5 text-white/90 backdrop-blur-sm transition-all duration-300 hover:bg-white/10"
+      )}
+    >
+      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/10">
+        <Icon size={18} className="text-white" />
+      </div>
+      <span className="whitespace-nowrap text-sm font-medium">{text}</span>
+    </div>
+  )
+}
 
 export function HeroSection() {
-  const badges = [
-    { icon: TrendingUp, text: "INOVAÇÃO" },
-    { icon: Check, text: "100% PERICIADOS" },
-    { icon: Shield, text: "30 ANOS DE ESTRADA" },
-    { icon: ShoppingCart, text: "COMPRA SEGURA" },
-    { icon: Car, text: "+100K VEÍCULOS VENDIDOS" },
-  ]
-
   return (
     <section className="relative h-[500px] sm:h-[600px] w-full overflow-hidden">
       {/* Background Image */}
@@ -27,33 +53,26 @@ export function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="relative container mx-auto px-4 h-full flex flex-col justify-center">
-        <div className="max-w-2xl">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
-            Tradição em realizar sonhos
-          </h1>
-          <p className="text-base sm:text-lg md:text-xl text-white/90 mb-8 md:mb-12 leading-relaxed">
-            Mais de 30 anos de história em Ribeirão Preto. Veículos
-            periciados, revisados e com garantia de procedência.
-          </p>
-
-          {/* Badges */}
-          <div className="flex flex-wrap gap-6">
-            {badges.map((badge, index) => {
-              const Icon = badge.icon
-              return (
-                <div
-                  key={index}
-                  className="flex items-center gap-2 text-white/90 group"
-                >
-                  <div className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/20 transition-colors">
-                    <Icon size={16} className="text-white" />
-                  </div>
-                  <span className="text-xs sm:text-sm font-medium">{badge.text}</span>
-                </div>
-              )
-            })}
+      <div className="relative z-10 flex h-full flex-col justify-between">
+        <div className="container mx-auto flex flex-1 flex-col justify-center px-4">
+          <div className="max-w-2xl pt-20">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+              Tradição em realizar sonhos
+            </h1>
+            <p className="text-base sm:text-lg md:text-xl text-white/90 mb-8 leading-relaxed">
+              Mais de 30 anos de história em Ribeirão Preto. Veículos
+              periciados, revisados e com garantia de procedência.
+            </p>
           </div>
+        </div>
+
+        {/* Badges carousel - full width de ponta a ponta */}
+        <div className="relative z-10 w-full overflow-hidden pb-20 sm:pb-20">
+          <Marquee speed={35} pauseOnHover gap="1rem" className="w-full py-4">
+            {badges.map((badge, index) => (
+              <BadgeCard key={index} icon={badge.icon} text={badge.text} />
+            ))}
+          </Marquee>
         </div>
       </div>
 
