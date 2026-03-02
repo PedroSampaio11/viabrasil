@@ -50,12 +50,15 @@ export function Header() {
 
   return (
     <>
-      <header
-        className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${scrolled
-          ? "bg-[#00020C]/80 backdrop-blur-xl border-b border-white/10"
-          : "bg-[#00020C] border-b border-blue-900/20"
-          }`}
-      >
+<header
+  className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 
+  [-webkit-mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_90%,transparent_100%)]
+  [mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_90%,transparent_100%)] 
+  ${scrolled
+      ? "bg-[#00020C]/80 backdrop-blur-xl border-b border-white/10"
+      : "bg-[#00020C] border-b border-blue-900/20"
+  }`}
+>
         <div className="container mx-auto px-4">
           <div className="flex items-center py-4 justify-between">
             {/* Menu Esquerdo - Desktop */}

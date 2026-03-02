@@ -101,7 +101,7 @@ export function Footer() {
 
         {/* Linha divisória */}
         <div className="max-w-7xl mx-auto">
-          <div className="border-t border-white/10 my-8" />
+       <div className="border-t border-white/2 my-8" />
 
           {/* Rodapé inferior */}
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs sm:text-sm text-white/60">
