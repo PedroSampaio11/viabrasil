@@ -225,10 +225,11 @@ export default function SobrePage() {
       <section className="relative h-[420px] sm:h-[500px] w-full overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/via-brasil-home.png"
+            src="/images/ViaIMG.png"
             alt="Via Brasil Showroom"
             fill
             quality={100}
+            unoptimized 
             className="object-cover"
             priority
           />
@@ -237,13 +238,13 @@ export default function SobrePage() {
         <div className="relative container mx-auto px-4 h-full flex flex-col justify-center">
           <div className="max-w-2xl">
             <span className="inline-block rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-[#CBD5E1] mb-4">
-              Sobre nós
+             NOSSA HISTÓRIA
             </span>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
-              30 Anos de Excelência.
+              30 Anos elevando o padrão em Ribeirão Pires.
             </h1>
             <p className="text-sm sm:text-base md:text-lg text-white/90 mb-2 leading-relaxed max-w-xl">
-              Mais de 30 anos de história em Ribeirão Preto. Veículos periciados, revisados e com garantia de procedência.
+             Não vendemos apenas carros, entregamos tranquilidade. Nossa trajetória de três décadas foi construída sobre três pilares: transparência absoluta, procedência rigorosa e um compromisso inabalável com a sua segurança.
             </p>
             <p className="text-sm sm:text-base text-white/80 leading-relaxed max-w-xl">
               Uma trajetória construída com trabalho constante, visão de crescimento e compromisso com cada cliente.
@@ -266,7 +267,7 @@ export default function SobrePage() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5 }}
         >
-          Nossa História – Linha do Tempo
+          Nossa Jornada em Destaque.
         </motion.p>
 
         <div className="flex w-full items-start gap-8 sm:gap-20">

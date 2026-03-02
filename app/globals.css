@@ -164,7 +164,7 @@ html {
 /* Barra de scroll: trilho escuro, thumb amarelo arredondado */
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--vb-yellow) #1e293b;
+  scrollbar-color: var(--vb-yellow) hsla(217, 33%, 17%, 0);
 }
 
 *::-webkit-scrollbar {
@@ -173,7 +173,7 @@ html {
 }
 
 *::-webkit-scrollbar-track {
-  background: #1e293b;
+  background: hsla(217, 33%, 17%, 0);
 }
 
 *::-webkit-scrollbar-thumb {

@@ -7,31 +7,22 @@ import { AccentCtaButton } from "./accent-cta-button"
 export function SellTradeSection() {
   return (
     <motion.section
-      className="relative min-h-[400px] sm:min-h-[600px] w-full overflow-hidden"
+      // Adicionei um fundo escuro padrão aqui (bg-[#00020C]) já que o texto é branco. 
+      // Se a sua página já tiver fundo escuro, você pode remover ou ajustar essa classe.
+      className="relative w-full overflow-hidden bg-[#00020C] py-16 lg:py-24"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.5 }}
     >
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <Image
-          src="/images/faixada-viabrasil.jpg"
-          alt="Fachada Via Brasil"
-          fill
-          className="object-cover"
-          priority
-        />
-        {/* Overlay escuro */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/50" />
-      </div>
-
-      {/* Content – z-index acima do gradiente decorativo */}
-      <div className="relative z-10 container mx-auto px-4 py-20">
+      {/* Container com Flexbox: Empilha no mobile (flex-col) e fica lado a lado no desktop (lg:flex-row) */}
+      <div className="container mx-auto px-4 flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+        
+        {/* Content – Lado Esquerdo */}
         <motion.div
-          className="max-w-2xl"
-          initial={{ opacity: 0, y: 32 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          className="w-full lg:w-1/2 max-w-2xl"
+          initial={{ opacity: 0, x: -32 }} // Animação vindo da esquerda
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
         >
@@ -43,25 +34,42 @@ export function SellTradeSection() {
           </div>
 
           {/* Title */}
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-white mb-4 md:mb-6 leading-tight">
-            Seu seminovo vale mais na Via Brasil.
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 leading-tight">
+            Seu seminovo tem mais valor na Via Brasil.
           </h2>
 
           {/* Description */}
-          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/80 mb-6 md:mb-10 leading-relaxed max-w-xl">
-            Escolha o modelo ideal para o seu estilo de vida. O propósito da Via Brasil é ser a melhor escolha em automóveis para seus clientes e fazer parte dos momentos especiais da sua vida
+          <p className="text-base sm:text-lg lg:text-xl text-white/80 mb-8 md:mb-10 leading-relaxed">
+            Garantimos uma avaliação justa e transparente do seu veículo atual. Use o seu carro como entrada ou venda com segurança e pagamento à vista.
           </p>
 
-          {/* CTA Button – componente próprio */}
+          {/* CTA Button */}
           <AccentCtaButton href="/venda" ariaLabel="Cotar meu veículo">
             Cotar agora
           </AccentCtaButton>
         </motion.div>
-      </div>
 
-      {/* Decorative gradient bottom */}
-      <div className="absolute hidden sm:block bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#00020C] to-transparent" />
+        {/* Image – Lado Direito */}
+   <motion.div
+          // Trocamos o min-h fixo por proporções (aspect-ratio) para a imagem não esticar demais.
+          // No mobile fica retangular (aspect-video) e no desktop fica mais quadradinha (aspect-square)
+          className="w-full lg:w-1/2 relative aspect-video lg:aspect-square max-h-[500px] rounded-3xl overflow-hidden shadow-2xl"
+          initial={{ opacity: 0, x: 32 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.55, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <Image
+            src="/images/KeysIMG.png"
+            alt="Mão entregando chave de carro no showroom Via Brasil"
+            fill
+            unoptimized 
+            className="object-cover"
+            priority
+          />
+        </motion.div>
+        
+      </div>
     </motion.section>
   )
 }
-

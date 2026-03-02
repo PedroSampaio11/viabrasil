@@ -60,7 +60,7 @@ export function EstoqueSection() {
           <p className="text-sm sm:text-base md:text-lg text-white/80 max-w-2xl">
             Escolha o modelo ideal para o seu estilo de vida.
             O propósito da Via Brasil é ser a melhor escolha em automóveis para
-            seus clientes e fazer parte dos momentos especiais da sua vida
+            seus clientes e fazer parte dos momentos especiais da sua vida.
           </p>
         </motion.div>
 

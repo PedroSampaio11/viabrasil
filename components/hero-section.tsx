@@ -40,17 +40,17 @@ export function HeroSection() {
   return (
     <section className="relative h-[500px] sm:h-[600px] w-full overflow-hidden">
       {/* Background Image */}
+     {/* Background Image */}
       <div className="absolute inset-0">
         <Image
-          src="/images/via-brasil-home.png"
+          src="/images/HeroIMG.png"
           alt="Via Brasil Showroom"
           fill
-          quality={100}
+          unoptimized 
           className="object-cover"
           priority
         />
-        {/* Overlay escuro */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
+        <div className="absolute inset-0 bg-black/40" /> 
       </div>
 
       {/* Content */}
@@ -71,8 +71,7 @@ export function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
             >
-              Mais de 30 anos de história em Ribeirão Preto. Veículos
-              periciados, revisados e com garantia de procedência.
+             A referência automotiva de Ribeirão Pires há mais de 30 anos. Novos e Seminovos com laudo cautelar aprovado e garantia total de procedência.
             </motion.p>
           </div>
         </div>

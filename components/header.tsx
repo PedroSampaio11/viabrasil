@@ -127,7 +127,7 @@ export function Header() {
               <button
                 className="px-6 py-2.5 bg-green-500 hover:bg-green-600 text-white rounded-full text-sm font-semibold transition-colors shadow-lg shadow-green-500/20"
               >
-                FALE COM CONSULTOR
+                Falar com Consultor
               </button>
             </div>
 

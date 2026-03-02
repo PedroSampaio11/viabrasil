@@ -13,7 +13,7 @@ export function Footer() {
   return (
     <footer className="bg-[#00020C] text-white">
       {/* Linha decorativa no topo */}
-      <div className="h-px bg-gradient-to-r from-[#034EA2] via-[#00AA56] to-[#FFCC00]" />
+ <div className="h-px bg-[linear-gradient(to_right,transparent,#034EA2,#00AA56,#FFCC00,transparent)]" />
 
       <div className="w-full px-4 py-12">
         <div className="max-w-7xl mx-auto">

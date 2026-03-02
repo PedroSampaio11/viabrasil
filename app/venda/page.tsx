@@ -46,7 +46,7 @@ export default function VendaPage() {
       <section className="relative h-[300px] sm:h-[600px] w-full overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/contato-home.jpg"
+            src="/images/VendaVeiculoIMG.png"
             alt="Via Brasil"
             fill
             className="object-cover"

@@ -85,10 +85,11 @@ export default function ContatoPage() {
       <section className="relative h-[300px] sm:h-[500px] w-full overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/contato-home.jpg"
+            src="/images/VendaIMG.png"
             alt="Interior Via Brasil"
             fill
             quality={100}
+            unoptimized 
             className="object-cover"
             priority
           />

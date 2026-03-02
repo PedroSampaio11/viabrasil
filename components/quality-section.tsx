@@ -62,23 +62,23 @@ export function QualitySection() {
           {/* Badge */}
           <div className="mb-6">
             <span className="inline-block rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-[#CBD5E1]">
-              Sobre
+            NOSSA ESSÊNCIA
             </span>
           </div>
 
           {/* Title */}
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-white mb-4 md:mb-6 leading-tight">
-            Qualidade Garantida
+          Excelência em cada detalhe.
           </h2>
 
           {/* Description */}
           <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/80 mb-6 md:mb-10 leading-relaxed max-w-xl">
-            Há mais de 30 anos, nossa obsessão é a sua segurança. Na Via Brasil, qualidade não é diferencial, é regra.
+           Mais do que vender carros, entregamos tranquilidade. Há três décadas elevando o padrão do mercado com uma curadoria rigorosa e um atendimento que entende o que você busca.
           </p>
 
           {/* CTA Button */}
           <AccentCtaButton href="/sobre" ariaLabel="Saiba mais sobre a Via Brasil">
-            Saiba mais
+            Conhecer a Via Brasil
           </AccentCtaButton>
         </motion.div>
       </div>
