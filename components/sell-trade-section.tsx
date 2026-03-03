@@ -17,7 +17,7 @@ export function SellTradeSection() {
     >
       {/* Container com Flexbox: Empilha no mobile (flex-col) e fica lado a lado no desktop (lg:flex-row) */}
       <div className="container mx-auto px-4 flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
-        
+
         {/* Content – Lado Esquerdo */}
         <motion.div
           className="w-full lg:w-1/2 max-w-2xl"
@@ -34,7 +34,7 @@ export function SellTradeSection() {
           </div>
 
           {/* Title */}
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 leading-tight">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 leading-tight">
             Seu seminovo tem mais valor na Via Brasil.
           </h2>
 
@@ -50,7 +50,7 @@ export function SellTradeSection() {
         </motion.div>
 
         {/* Image – Lado Direito */}
-   <motion.div
+        <motion.div
           // Trocamos o min-h fixo por proporções (aspect-ratio) para a imagem não esticar demais.
           // No mobile fica retangular (aspect-video) e no desktop fica mais quadradinha (aspect-square)
           className="w-full lg:w-1/2 relative aspect-video lg:aspect-square max-h-[500px] rounded-3xl overflow-hidden shadow-2xl"
@@ -63,12 +63,12 @@ export function SellTradeSection() {
             src="/images/KeysIMG.png"
             alt="Mão entregando chave de carro no showroom Via Brasil"
             fill
-            unoptimized 
+            unoptimized
             className="object-cover"
             priority
           />
         </motion.div>
-        
+
       </div>
     </motion.section>
   )

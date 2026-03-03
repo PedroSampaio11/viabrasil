@@ -119,7 +119,7 @@ export default function ContatoPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
         >
-          <div className="rounded-2xl bg-[#00020C]/95 backdrop-blur border border-white/5 p-10 sm:p-12 lg:p-16 xl:p-20">
+          <div className="rounded-2xl bg-[#00020C]/95 backdrop-blur border border-white/5 p-4 sm:p-12 lg:p-16 xl:p-20">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 xl:gap-32">
               {/* Formulário */}
               <form onSubmit={handleSubmit} className="space-y-6">

@@ -229,7 +229,7 @@ export default function SobrePage() {
             alt="Via Brasil Showroom"
             fill
             quality={100}
-            unoptimized 
+            unoptimized
             className="object-cover"
             priority
           />
@@ -238,13 +238,13 @@ export default function SobrePage() {
         <div className="relative container mx-auto px-4 h-full flex flex-col justify-center">
           <div className="max-w-2xl">
             <span className="inline-block rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-[#CBD5E1] mb-4">
-             NOSSA HISTÓRIA
+              NOSSA HISTÓRIA
             </span>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
               30 Anos elevando o padrão em Ribeirão Pires.
             </h1>
             <p className="text-sm sm:text-base md:text-lg text-white/90 mb-2 leading-relaxed max-w-xl">
-             Não vendemos apenas carros, entregamos tranquilidade. Nossa trajetória de três décadas foi construída sobre três pilares: transparência absoluta, procedência rigorosa e um compromisso inabalável com a sua segurança.
+              Não vendemos apenas carros, entregamos tranquilidade. Nossa trajetória de três décadas foi construída sobre três pilares: transparência absoluta, procedência rigorosa e um compromisso inabalável com a sua segurança.
             </p>
             <p className="text-sm sm:text-base text-white/80 leading-relaxed max-w-xl">
               Uma trajetória construída com trabalho constante, visão de crescimento e compromisso com cada cliente.
@@ -258,7 +258,7 @@ export default function SobrePage() {
       <section
         ref={sectionRef}
         id="linha-do-tempo"
-        className="mx-auto flex w-full max-w-7xl flex-col items-center px-4 pt-16 sm:pt-20"
+        className="mx-auto flex w-full max-w-7xl flex-col items-center px-4 sm:pt-16 sm:pt-20"
       >
         <motion.p
           className="mb-10 max-w-lg text-center text-2xl font-semibold uppercase leading-normal text-white sm:mb-12 sm:text-3xl sm:text-[42px] sm:leading-tight"

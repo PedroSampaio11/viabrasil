@@ -66,7 +66,7 @@ export function HeroSection() {
               Tradição em realizar sonhos
             </motion.h1>
             <motion.p
-              className="text-base sm:text-lg md:text-xl text-white/90 mb-8 leading-relaxed"
+              className="text-base sm:text-lg md:text-xl text-white/90 sm:mb-8 leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
@@ -78,7 +78,7 @@ export function HeroSection() {
 
         {/* Badges carousel - full width de ponta a ponta */}
         <motion.div
-          className="relative z-10 w-full overflow-hidden sm:pb-20 sm:pb-20"
+          className="relative z-10 w-full overflow-hidden pb-6 sm:pb-20 sm:pb-20"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
