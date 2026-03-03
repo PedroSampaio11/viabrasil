@@ -14,7 +14,7 @@ export default function Home() {
       <SellTradeSection />
       <QualitySection />
       <TestimonialsSection />
-      {/* <VehicleInterestForm /> */}
+      <VehicleInterestForm imageSrc="/home-form.jpg" imageAlt="Via Brasil Automóveis" />
       <WhatsAppButton />
     </>
   )

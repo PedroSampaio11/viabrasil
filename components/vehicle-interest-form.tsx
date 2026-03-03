@@ -1,13 +1,16 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import { Loader2 } from "lucide-react"
 
 interface VehicleInterestFormProps {
   codigoVeiculo?: number
+  imageSrc?: string
+  imageAlt?: string
 }
 
-export function VehicleInterestForm({ codigoVeiculo }: VehicleInterestFormProps) {
+export function VehicleInterestForm({ codigoVeiculo, imageSrc, imageAlt = "Via Brasil" }: VehicleInterestFormProps) {
   const [formData, setFormData] = useState({
     nome: "",
     email: "",
@@ -67,13 +70,31 @@ export function VehicleInterestForm({ codigoVeiculo }: VehicleInterestFormProps)
     })
   }
 
+  const withBackgroundImage = !!imageSrc
+
   return (
-    <section className="py-4 sm:py-20 bg-[#00020C]">
-      <div className="container mx-auto px-4">
+    <section className={withBackgroundImage ? "relative min-h-[480px] sm:min-h-[520px] w-full overflow-hidden flex flex-col justify-center py-12 sm:py-20" : "py-4 sm:py-20 bg-[#00020C]"}>
+      {withBackgroundImage && (
+        <>
+          <div className="absolute bg-black/70 inset-0">
+            <Image
+              src={imageSrc}
+              alt=""
+              fill
+              className="object-cover"
+              sizes="100vw"
+              priority={false}
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/75 to-black/50" />
+          </div>
+          <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#00020C] to-transparent pointer-events-none" />
+        </>
+      )}
+      <div className={withBackgroundImage ? "relative container mx-auto px-4" : "container mx-auto px-4"}>
         <div className="max-w-5xl mx-auto">
           {/* Header */}
           <div className="mb-8 md:mb-12">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl max-w-[670px] font-bold text-white mb-4">
               Não encontrou o modelo que estava buscando?
             </h2>
             <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/80">
