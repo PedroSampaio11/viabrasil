@@ -57,8 +57,10 @@ export function EstoqueSection() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
             Mova Sua Paixão
           </h2>
-          <p className="text-sm sm:text-base md:text-lg text-white/80 max-w-2xl">
+          <p className="text-sm sm:text-base md:text-lg text-white/80 max-w-xl">
             Escolha o modelo ideal para o seu estilo de vida.
+          </p>
+          <p className="text-sm sm:text-base md:text-lg text-white/80 max-w-xl">
             O propósito da Via Brasil é ser a melhor escolha em automóveis para
             seus clientes e fazer parte dos momentos especiais da sua vida.
           </p>

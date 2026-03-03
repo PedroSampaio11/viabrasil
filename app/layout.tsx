@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { SplashScreen } from "@/components/splash-screen";
 
 export const metadata: Metadata = {
   title: "Via Brasil - Tradição em realizar sonhos",
@@ -16,16 +17,20 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Outfit:wght@100..900&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
           rel="stylesheet"
         />
       </head>
       <body className="antialiased font-sans">
-        <Header />
-        <div className="h-[72px]" aria-hidden="true" />
-        {children}
-        <Footer />
+        <SplashScreen>
+          <Header />
+          <div className="h-[72px]" aria-hidden="true" />
+          {children}
+          <Footer />
+        </SplashScreen>
       </body>
     </html>
   );

@@ -38,27 +38,27 @@ function BadgeCard({
 
 export function HeroSection() {
   return (
-    <section className="relative h-[500px] sm:h-[600px] w-full overflow-hidden">
+    <section className="relative h-[380px] sm:h-[600px] w-full overflow-hidden">
       {/* Background Image */}
-     {/* Background Image */}
+      {/* Background Image */}
       <div className="absolute inset-0">
         <Image
           src="/images/HeroIMG.png"
           alt="Via Brasil Showroom"
           fill
-          unoptimized 
+          unoptimized
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-black/40" /> 
+        <div className="absolute inset-0 bg-black/40" />
       </div>
 
       {/* Content */}
       <div className="relative z-10 flex h-full flex-col justify-between">
         <div className="container mx-auto flex flex-1 flex-col justify-center px-4">
-          <div className="max-w-2xl pt-20">
+          <div className="max-w-2xl sm:pt-20">
             <motion.h1
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight"
+              className="text-3xl max-w-[265px] sm:text-4xl md:text-5xl lg:text-6xl md:max-w-lg font-bold text-white mb-4 leading-tight"
               initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
@@ -71,14 +71,14 @@ export function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
             >
-             A referência automotiva de Ribeirão Pires há mais de 30 anos. Novos e Seminovos com laudo cautelar aprovado e garantia total de procedência.
+              A referência automotiva de Ribeirão Pires há mais de 30 anos. Novos e Seminovos com laudo cautelar aprovado e garantia total de procedência.
             </motion.p>
           </div>
         </div>
 
         {/* Badges carousel - full width de ponta a ponta */}
         <motion.div
-          className="relative z-10 w-full overflow-hidden pb-20 sm:pb-20"
+          className="relative z-10 w-full overflow-hidden sm:pb-20 sm:pb-20"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
