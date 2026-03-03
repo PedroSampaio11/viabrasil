@@ -89,15 +89,15 @@ export default function ContatoPage() {
             alt="Interior Via Brasil"
             fill
             quality={100}
-            unoptimized 
+            unoptimized
             className="object-cover"
             priority
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
         </div>
         <div className="relative container mx-auto px-4 h-full flex flex-col justify-end pb-24 sm:pb-32">
-          <span className="inline-block text-white/80 text-xs sm:text-sm font-semibold uppercase tracking-wider mb-2">
-            CONTATO
+          <span className="inline-block rounded-full w-fit border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-[#CBD5E1] mb-4">
+            Contato
           </span>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
             Fale com a Via Brasil

@@ -13,7 +13,7 @@ export function Footer() {
   return (
     <footer className="bg-[#00020C] text-white">
       {/* Linha decorativa no topo */}
- <div className="h-px bg-[linear-gradient(to_right,transparent,#034EA2,#00AA56,#FFCC00,transparent)]" />
+      <div className="h-px bg-[linear-gradient(to_right,transparent,#034EA2,#00AA56,#FFCC00,transparent)]" />
 
       <div className="w-full px-4 py-12">
         <div className="max-w-7xl mx-auto">
@@ -101,23 +101,17 @@ export function Footer() {
 
         {/* Linha divisória */}
         <div className="max-w-7xl mx-auto">
-       <div className="border-t border-white/2 my-8" />
+          <div className="border-t border-white/2 my-8" />
 
           {/* Rodapé inferior */}
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs sm:text-sm text-white/60">
             {/* Links */}
             <div className="flex flex-wrap gap-4 justify-center md:justify-start">
               <Link
-                href="/termos"
-                className="hover:text-yellow-500 transition-colors"
-              >
-                Termos e Condições
-              </Link>
-              <Link
                 href="/privacidade"
                 className="hover:text-yellow-500 transition-colors"
               >
-                Políticas e Privacidade
+                Política de Privacidade
               </Link>
             </div>
 

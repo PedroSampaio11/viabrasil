@@ -55,8 +55,8 @@ export default function VendaPage() {
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
         </div>
         <div className="relative container mx-auto px-4 h-full flex flex-col justify-end pb-24 sm:pb-32">
-          <span className="inline-block text-white/80 text-xs sm:text-sm font-semibold uppercase tracking-wider mb-2">
-            VENDA
+          <span className="inline-block w-fit rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-[#CBD5E1] mb-4">
+            Venda
           </span>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
             Vender meu Carro

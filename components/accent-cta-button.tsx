@@ -11,7 +11,7 @@ interface AccentCtaButtonProps {
 }
 
 /**
- * Botão CTA compartilhado: estilo âmbar com seta (chevron).
+ * Botão CTA compartilhado: gradiente verde→amarelo desliza no hover.
  * Use em qualquer seção: Cotar agora, Saiba mais, etc.
  */
 export function AccentCtaButton({
@@ -24,16 +24,22 @@ export function AccentCtaButton({
     <Link
       href={href}
       className={cn(
-        "relative z-10 inline-flex min-h-[3rem] w-full max-w-[20rem] items-center justify-center gap-4 rounded-full bg-[var(--vb-yellow)] pl-5 pr-6 py-3 text-black transition-all hover:bg-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-500/50",
+        "group relative inline-flex h-12 min-w-[9rem] w-full max-w-[20rem] items-center justify-center gap-3 overflow-hidden rounded-[30em] border-none bg-[var(--vb-yellow)] px-6 py-0 text-[15px] font-bold uppercase tracking-wide text-black shadow-[6px_6px_12px_rgba(0,0,0,0.3),-2px_-2px_8px_rgba(255,255,255,0.05)] focus:outline-none focus:ring-2 focus:ring-amber-500/50",
         className
       )}
       aria-label={ariaLabel ?? undefined}
     >
       <span
-        className="pointer-events-none shrink-0 border-t-2 border-r-2 border-black w-2.5 h-2.5 rotate-45 inline-block -ml-1"
+        className="absolute left-0 top-0 h-full w-0 rounded-[30em] bg-gradient-to-r from-[#0fd850] to-[#f9f047] transition-[width] duration-500 ease-out group-hover:w-full"
         aria-hidden
       />
-      <span className="font-bold uppercase tracking-wide pointer-events-none">{children}</span>
+      <span className="relative z-10 flex items-center justify-center gap-3">
+        <span
+          className="pointer-events-none shrink-0 border-t-2 border-r-2 border-black w-2.5 h-2.5 rotate-45 inline-block -ml-1"
+          aria-hidden
+        />
+        <span className="pointer-events-none font-bold uppercase tracking-wide">{children}</span>
+      </span>
     </Link>
   )
 }
