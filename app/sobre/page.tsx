@@ -236,29 +236,31 @@ export default function SobrePage() {
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
         </div>
         <div className="relative container mx-auto px-4 h-full flex flex-col justify-center">
-          <div className="max-w-2xl">
-            <span className="inline-block rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-[#CBD5E1] mb-4">
+          <div className="max-w-2xl space-y-6">
+            <span className="inline-block rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-[#CBD5E1]">
               NOSSA HISTÓRIA
             </span>
-            <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-white leading-tight tracking-tight">
               30 Anos elevando o padrão em Ribeirão Pires.
             </h1>
-            <p className="text-sm sm:text-base md:text-lg text-white/90 mb-2 leading-relaxed max-w-xl">
-              Não vendemos apenas carros, entregamos tranquilidade. Nossa trajetória de três décadas foi construída sobre três pilares: transparência absoluta, procedência rigorosa e um compromisso inabalável com a sua segurança.
-            </p>
-            <p className="text-sm sm:text-base text-white/80 leading-relaxed max-w-xl">
-              Uma trajetória construída com trabalho constante, visão de crescimento e compromisso com cada cliente.
-            </p>
+            <div className="space-y-5 max-w-xl">
+              <p className="text-base sm:text-lg text-white/90 leading-[1.7]">
+                Não vendemos apenas carros, entregamos tranquilidade. Nossa trajetória de três décadas foi construída sobre três pilares: transparência absoluta, procedência rigorosa e um compromisso inabalável com a sua segurança.
+              </p>
+              <p className="text-base sm:text-lg text-white/80 leading-[1.7]">
+                Uma trajetória construída com trabalho constante, visão de crescimento e compromisso com cada cliente.
+              </p>
+            </div>
           </div>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#00020C] to-transparent pointer-events-none" />
+        <div className="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-[#00020C] to-transparent pointer-events-none" />
       </section>
 
       {/* Timeline – janela fixa à esquerda, foto dinâmica à direita */}
       <section
         ref={sectionRef}
         id="linha-do-tempo"
-        className="mx-auto flex w-full max-w-7xl flex-col items-center px-4 sm:pt-16 sm:pt-20"
+        className="mx-auto mt-10 sm:mt-0 flex w-full max-w-7xl flex-col items-center px-4 sm:pt-16 sm:pt-20"
       >
         <motion.p
           className="mb-10 max-w-lg text-center text-2xl font-semibold uppercase leading-normal text-white sm:mb-12 sm:text-3xl sm:text-[42px] sm:leading-tight"
@@ -351,7 +353,7 @@ export default function SobrePage() {
                 return (
                   <motion.div
                     key={item.title}
-                    className="p-6 rounded-xl bg-white/5 border border-white/10"
+                    className="p-6 rounded-xl bg-white/5 border border-white/10 transition-all duration-300 ease-out hover:scale-[1.02] hover:backdrop-blur-md cursor-default"
                     initial={{ opacity: 0, y: 24 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-40px" }}

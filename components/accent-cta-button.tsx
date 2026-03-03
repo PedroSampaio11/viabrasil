@@ -34,10 +34,6 @@ export function AccentCtaButton({
         aria-hidden
       />
       <span className="relative z-10 flex items-center justify-center gap-3">
-        <span
-          className="pointer-events-none shrink-0 border-t-2 border-r-2 border-black w-2.5 h-2.5 rotate-45 inline-block -ml-1"
-          aria-hidden
-        />
         <span className="pointer-events-none font-bold uppercase tracking-wide">{children}</span>
       </span>
     </Link>

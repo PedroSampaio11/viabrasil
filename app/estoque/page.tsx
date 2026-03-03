@@ -506,21 +506,21 @@ export default function EstoquePage() {
 
                   {/* Paginação */}
                   {vehicles.length > PAGE_SIZE && (
-                    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-12">
-                      <p className="text-white/60 text-sm order-2 sm:order-1">
+                    <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 mb-8 sm:mb-12">
+                      <p className="text-white/60 text-xs sm:text-sm order-2 sm:order-1">
                         Mostrando {from} a {to} de {vehicles.length} veículos
                       </p>
-                      <div className="flex items-center gap-1 order-1 sm:order-2">
+                      <div className="flex items-center gap-0.5 sm:gap-1 order-1 sm:order-2">
                         <button
                           type="button"
                           onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                           disabled={safePage <= 1}
-                          className="p-2 rounded-lg bg-white/10 border border-white/20 text-white hover:bg-white/20 disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer"
+                          className="p-1.5 sm:p-2 rounded-md sm:rounded-lg bg-white/10 border border-white/20 text-white hover:bg-white/20 disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer"
                           aria-label="Página anterior"
                         >
-                          <ChevronLeft className="w-5 h-5" />
+                          <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
                         </button>
-                        <div className="flex items-center gap-1 px-2">
+                        <div className="flex items-center gap-0.5 sm:gap-1 px-1 sm:px-2">
                           {Array.from({ length: totalPages }, (_, i) => i + 1)
                             .filter((p) => {
                               if (totalPages <= 7) return true
@@ -531,12 +531,12 @@ export default function EstoquePage() {
                             .map((p, i, arr) => (
                               <span key={p}>
                                 {i > 0 && arr[i - 1] !== p - 1 && (
-                                  <span className="px-1 text-white/40">…</span>
+                                  <span className="px-0.5 sm:px-1 text-white/40 text-xs">…</span>
                                 )}
                                 <button
                                   type="button"
                                   onClick={() => setCurrentPage(p)}
-                                  className={`min-w-[2.25rem] h-9 px-2 rounded-lg text-sm font-medium transition-colors cursor-pointer ${p === safePage
+                                  className={`min-w-[1.75rem] sm:min-w-[2.25rem] h-7 sm:h-9 px-1.5 sm:px-2 rounded-md sm:rounded-lg text-xs sm:text-sm font-medium transition-colors cursor-pointer ${p === safePage
                                     ? "bg-yellow-500 text-black"
                                     : "bg-white/10 border border-white/20 text-white hover:bg-white/20"
                                     }`}
@@ -550,10 +550,10 @@ export default function EstoquePage() {
                           type="button"
                           onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
                           disabled={safePage >= totalPages}
-                          className="p-2 rounded-lg bg-white/10 border border-white/20 text-white hover:bg-white/20 disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer"
+                          className="p-1.5 sm:p-2 rounded-md sm:rounded-lg bg-white/10 border border-white/20 text-white hover:bg-white/20 disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer"
                           aria-label="Próxima página"
                         >
-                          <ChevronRight className="w-5 h-5" />
+                          <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
                         </button>
                       </div>
                     </div>
