@@ -1,31 +1,35 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Image from "next/image"
-import { Loader2 } from "lucide-react"
+import { useState } from "react";
+import Image from "next/image";
+import { Loader2 } from "lucide-react";
 
 interface VehicleInterestFormProps {
-  codigoVeiculo?: number
-  imageSrc?: string
-  imageAlt?: string
+  codigoVeiculo?: number;
+  imageSrc?: string;
+  imageAlt?: string;
 }
 
-export function VehicleInterestForm({ codigoVeiculo, imageSrc, imageAlt = "Via Brasil" }: VehicleInterestFormProps) {
+export function VehicleInterestForm({
+  codigoVeiculo,
+  imageSrc,
+  imageAlt = "Via Brasil",
+}: VehicleInterestFormProps) {
   const [formData, setFormData] = useState({
     nome: "",
     email: "",
     telefone: "",
     modelo: "",
-  })
-  const [loading, setLoading] = useState(false)
-  const [success, setSuccess] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  });
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    setError(null)
-    setSuccess(false)
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+    setSuccess(false);
 
     try {
       const response = await fetch("/api/leads", {
@@ -41,56 +45,69 @@ export function VehicleInterestForm({ codigoVeiculo, imageSrc, imageAlt = "Via B
           codigoVeiculo: codigoVeiculo,
           interesse: 2, // 2 = Seminovos
         }),
-      })
+      });
 
       if (!response.ok) {
-        const data = await response.json()
-        throw new Error(data.error || "Erro ao enviar formulário")
+        const data = await response.json();
+        throw new Error(data.error || "Erro ao enviar formulário");
       }
 
-      setSuccess(true)
+      setSuccess(true);
       setFormData({
         nome: "",
         email: "",
         telefone: "",
         modelo: "",
-      })
+      });
     } catch (err: any) {
-      console.error("Erro ao enviar lead:", err)
-      setError(err.message || "Erro ao enviar formulário. Tente novamente.")
+      console.error("Erro ao enviar lead:", err);
+      setError(err.message || "Erro ao enviar formulário. Tente novamente.");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-    })
-  }
+    });
+  };
 
-  const withBackgroundImage = !!imageSrc
+  const withBackgroundImage = !!imageSrc;
 
   return (
-    <section className={withBackgroundImage ? "relative min-h-[480px] sm:min-h-[520px] w-full overflow-hidden flex flex-col justify-center py-12 sm:py-20" : "py-4 sm:py-20 bg-[#00020C]"}>
+    <section
+      className={
+        withBackgroundImage
+          ? "relative min-h-[480px] sm:min-h-[520px] w-full overflow-hidden flex flex-col justify-center py-12 sm:py-20"
+          : "py-4 sm:py-20 bg-[#00020C]"
+      }
+    >
       {withBackgroundImage && (
         <>
-          <div className="absolute bg-black/70 inset-0">
+          <div className="absolute  inset-0">
             <Image
               src={imageSrc}
               alt=""
               fill
               className="object-cover"
               sizes="100vw"
+              unoptimized
               priority={false}
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/75 to-black/50" />
+
           </div>
           <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#00020C] to-transparent pointer-events-none" />
         </>
       )}
-      <div className={withBackgroundImage ? "relative container mx-auto px-4" : "container mx-auto px-4"}>
+      <div
+        className={
+          withBackgroundImage
+            ? "relative container mx-auto px-4"
+            : "container mx-auto px-4"
+        }
+      >
         <div className="max-w-5xl mx-auto">
           {/* Header */}
           <div className="mb-8 md:mb-12">
@@ -208,7 +225,8 @@ export function VehicleInterestForm({ codigoVeiculo, imageSrc, imageAlt = "Via B
             {success && (
               <div className="bg-green-500/10 border border-green-500/50 rounded-lg p-4 mb-4">
                 <p className="text-green-400 text-center">
-                  Formulário enviado com sucesso! Entraremos em contato em breve.
+                  Formulário enviado com sucesso! Entraremos em contato em
+                  breve.
                 </p>
               </div>
             )}
@@ -225,7 +243,7 @@ export function VehicleInterestForm({ codigoVeiculo, imageSrc, imageAlt = "Via B
               <button
                 type="submit"
                 disabled={loading}
-                className="px-8 py-3 md:px-12 md:py-4 bg-yellow-500 hover:bg-yellow-400/95 disabled:opacity-50 disabled:cursor-not-allowed text-[#00020C] rounded-[22px] font-black text-lg sm:text-xl transition-colors duration-200 shadow-lg shadow-yellow-500/20 flex items-center gap-2 cursor-pointer"
+                className="px-8 py-3 md:px-12 md:py-4 bg-yellow-500 hover:bg-yellow-400/95 disabled:opacity-10 disabled:cursor-not-allowed text-[#00020C] rounded-[22px] font-black text-lg sm:text-xl transition-colors duration-200  flex items-center gap-2 cursor-pointer"
               >
                 {loading && <Loader2 className="w-5 h-5 animate-spin" />}
                 {loading ? "ENVIANDO..." : "ENVIAR"}
@@ -235,6 +253,5 @@ export function VehicleInterestForm({ codigoVeiculo, imageSrc, imageAlt = "Via B
         </div>
       </div>
     </section>
-  )
+  );
 }
-
