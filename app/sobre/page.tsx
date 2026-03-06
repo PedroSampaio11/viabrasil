@@ -7,8 +7,8 @@ import {
   Target,
   Eye,
   Heart,
-  Users,
 } from "lucide-react"
+import { Marquee } from "@/components/ui/marquee"
 
 // Nomes reais dos arquivos em public/images/sobre/ (com espaços e caracteres especiais)
 const SOBRE_IMAGES = [
@@ -76,11 +76,19 @@ const MVV = [
   },
 ]
 
+// Fotos em public/images/equipe (nomes com espaços/caracteres especiais)
 const TEAM = [
-  { name: "Lorenzo Marques", role: "CFO", desc: "Gestão financeira e estratégica." },
-  { name: "Leila Cristina", role: "Gerente", desc: "Operações e relacionamento." },
-  { name: "Carlos Silva", role: "Vendas", desc: "Consultoria e negociação." },
-  { name: "Ana Costa", role: "Pós-venda", desc: "Suporte e satisfação do cliente." },
+  { name: "Gilson", role: "CEO", desc: "Liderança e visão estratégica.", image: "Gilson - Ceo .jpg" },
+  { name: "Ricardo", role: "Gerente", desc: "Operações e relacionamento.", image: "Ricardo - Gerente .jpg" },
+  { name: "Lorenzo", role: "Administração", desc: "Gestão financeira e estratégica.", image: "Lorenzo - administração .jpg" },
+  { name: "Diego", role: "Vendas", desc: "Consultoria e negociação.", image: "Diego - vendas.jpg" },
+  { name: "Elisandro", role: "Vendas", desc: "Consultoria e negociação.", image: "Elisandro - vendas.jpg" },
+  { name: "Junior", role: "Vendas", desc: "Consultoria e negociação.", image: "Junior - vendas.jpg" },
+  { name: "Murillo", role: "Marketing", desc: "Comunicação e divulgação.", image: "Murillo - Marketing .jpg" },
+  { name: "Marcos", role: "Manutenção", desc: "Manutenção dos veículos.", image: "Marcos - manutenção .jpg" },
+  { name: "Guilherme", role: "Higienização", desc: "Higienização dos veículos.", image: "Guilherme - Higienização dos veículos .jpg" },
+  { name: "Jonas", role: "Higienização", desc: "Higienização dos veículos.", image: "Jonas - Higienização dos veículos .jpg" },
+  { name: "Rosângela", role: "Limpeza", desc: "Limpeza e organização.", image: "Rosângela - limpeza .jpg" },
 ]
 
 const TIMELINE_IMAGE_FALLBACK = "/images/via-brasil-home.png"
@@ -413,33 +421,37 @@ export default function SobrePage() {
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-5xl mx-auto">
-            {TEAM.map((person, i) => (
-              <motion.div
-                key={person.name}
-                className="flex flex-col items-center text-center"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
-                whileHover={{ y: -4 }}
-              >
-                <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-white/10 border-2 border-white/20 overflow-hidden mb-4">
-                  <div className="w-full h-full bg-gradient-to-br from-emerald-500/30 to-amber-500/20 flex items-center justify-center">
-                    <Users className="w-10 h-10 text-white/50" />
+          <div className="w-full overflow-hidden">
+            <Marquee speed={30} pauseOnHover gap="1.5rem" className="py-2">
+              {TEAM.map((person, i) => (
+                <div
+                  key={`${person.name}-${i}`}
+                  className="group w-64 shrink-0 rounded-xl overflow-hidden bg-white/5 border border-white/10 hover:border-white/20 transition-all duration-300 flex flex-col"
+                >
+                  <div className="relative aspect-[3/4] w-full overflow-hidden bg-white/5">
+                    <Image
+                      src={"/images/equipe/" + encodeURIComponent(person.image)}
+                      alt={person.name}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      sizes="256px"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
+                  <div className="p-4 flex flex-col flex-1">
+                    <h3 className="text-white font-semibold text-sm sm:text-base">
+                      {person.name}
+                    </h3>
+                    <p className="text-amber-400/90 text-xs sm:text-sm font-medium mt-0.5">
+                      {person.role}
+                    </p>
+                    <p className="text-white/50 text-xs mt-1 leading-snug">
+                      {person.desc}
+                    </p>
                   </div>
                 </div>
-                <h3 className="text-white font-semibold text-sm sm:text-base">
-                  {person.name}
-                </h3>
-                <p className="text-amber-400/90 text-xs sm:text-sm font-medium mt-0.5">
-                  {person.role}
-                </p>
-                <p className="text-white/50 text-xs mt-1">
-                  {person.desc}
-                </p>
-              </motion.div>
-            ))}
+              ))}
+            </Marquee>
           </div>
         </div>
       </section>
