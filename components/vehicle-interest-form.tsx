@@ -86,7 +86,7 @@ export function VehicleInterestForm({
     >
       {withBackgroundImage && (
         <>
-          <div className="absolute  inset-0">
+          <div className="absolute inset-0">
             <Image
               src={imageSrc}
               alt=""
