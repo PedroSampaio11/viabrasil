@@ -1,6 +1,6 @@
 "use client"
-export const dynamic = 'force-dynamic';
-import { useState, useEffect } from "react"
+
+import { useState, useEffect, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { VehicleCard } from "@/components/vehicle-card"
@@ -25,7 +25,8 @@ interface SearchFormData {
   searchQuery: string
 }
 
-export default function EstoquePage() {
+// 1. Criamos um componente interno com toda a sua lógica
+function EstoqueContent() {
   const searchParams = useSearchParams()
   const { register, handleSubmit, watch, reset, setValue } = useForm<SearchFormData>({
     defaultValues: {
@@ -66,7 +67,6 @@ export default function EstoquePage() {
   const from = vehicles.length === 0 ? 0 : (safePage - 1) * PAGE_SIZE + 1
   const to = Math.min(safePage * PAGE_SIZE, vehicles.length)
 
-  // Busca vinda do header (/?q=termo)
   useEffect(() => {
     const q = searchParams.get("q")
     if (q) {
@@ -75,7 +75,6 @@ export default function EstoquePage() {
     }
   }, [searchParams, setValue])
 
-  // Buscar marcas
   useEffect(() => {
     async function fetchMarcas() {
       try {
@@ -94,7 +93,6 @@ export default function EstoquePage() {
     fetchMarcas()
   }, [])
 
-  // Buscar modelos quando marca for selecionada
   useEffect(() => {
     async function fetchModelos() {
       if (!filters.marca) {
@@ -118,11 +116,9 @@ export default function EstoquePage() {
     fetchModelos()
   }, [filters.marca])
 
-  // Buscar veículos da API com filtros
   useEffect(() => {
     async function fetchVehicles() {
       try {
-        // Só mostra loading completo na primeira carga
         if (allVehicles.length === 0) {
           setLoading(true)
         } else {
@@ -130,7 +126,6 @@ export default function EstoquePage() {
         }
         setError(null)
 
-        // Construir query string com filtros
         const params = new URLSearchParams()
         if (filters.marca) params.append("IdMarca", filters.marca)
         if (filters.modelo) params.append("IdModelo", filters.modelo)
@@ -150,7 +145,6 @@ export default function EstoquePage() {
         const data: VeiculoRetornoModel[] = await response.json()
         setAllVehicles(data)
 
-        // Aplicar busca local se houver busca ativa, senão mostrar todos
         if (activeSearchQuery.trim()) {
           const query = activeSearchQuery.toLowerCase()
           const searchTerms = query.split(/\s+/).filter(term => term.length > 0)
@@ -187,7 +181,6 @@ export default function EstoquePage() {
     fetchVehicles()
   }, [filters.marca, filters.modelo, filters.anoDe, filters.anoAte, filters.precoDe, filters.precoAte, activeSearchQuery])
 
-  // Filtrar veículos por busca local (após carregar da API) - Busca apenas no botão
   useEffect(() => {
     if (!activeSearchQuery.trim()) {
       const mappedVehicles = allVehicles.map(mapVeiculoToCard)
@@ -199,13 +192,9 @@ export default function EstoquePage() {
 
     setSearching(true)
 
-    // Processar busca de forma assíncrona mas mostrar skeleton imediatamente
     const query = activeSearchQuery.toLowerCase().trim()
-
-    // Otimização: dividir termos de busca
     const searchTerms = query.split(/\s+/).filter(term => term.length > 0)
 
-    // Usar setTimeout para não bloquear a UI e garantir mínimo de 1 segundo de skeleton
     const startTime = Date.now()
     const timeoutId = setTimeout(() => {
       const filtered = allVehicles.filter((veiculo) => {
@@ -214,7 +203,6 @@ export default function EstoquePage() {
         const versaoLower = veiculo.Versao?.toLowerCase() || ""
         const fullName = `${marcaLower} ${modeloLower}`
 
-        // Busca otimizada: verifica se todos os termos estão presentes
         return searchTerms.every(term =>
           marcaLower.includes(term) ||
           modeloLower.includes(term) ||
@@ -224,8 +212,6 @@ export default function EstoquePage() {
       })
 
       const mappedVehicles = filtered.map(mapVeiculoToCard)
-
-      // Garantir que o skeleton apareça por pelo menos 1 segundo
       const elapsedTime = Date.now() - startTime
       const remainingTime = Math.max(0, 1000 - elapsedTime)
 
@@ -240,7 +226,6 @@ export default function EstoquePage() {
   }, [activeSearchQuery, allVehicles])
 
   const handleSearch = (data: SearchFormData) => {
-    // Executar busca apenas quando clicar no botão
     setActiveSearchQuery(data.searchQuery)
   }
 
@@ -253,7 +238,6 @@ export default function EstoquePage() {
   const handleFilterChange = (key: keyof FilterState, value: string) => {
     setFilters((prev) => {
       const newFilters = { ...prev, [key]: value }
-      // Limpar modelo se marca mudar
       if (key === "marca" && value !== prev.marca) {
         newFilters.modelo = ""
       }
@@ -278,17 +262,14 @@ export default function EstoquePage() {
     <div className="min-h-screen bg-[#00020C]">
       <section className="py-8 sm:py-12 bg-[#00020C]">
         <div className="container mx-auto px-4">
-          {/* Título */}
           <div className="mb-8">
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
               Nossos Veículos
             </h1>
           </div>
 
-          {/* Barra de Busca e Filtros */}
           <div className="mb-8">
             <form onSubmit={handleSubmit(handleSearch)} className="flex flex-row gap-2 sm:gap-4 items-center mb-4">
-              {/* Input de Busca */}
               <div className="flex-1 min-w-0 relative">
                 <div className="relative">
                   <Search className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-white/40" />
@@ -301,7 +282,6 @@ export default function EstoquePage() {
                 </div>
               </div>
 
-              {/* Botão Buscar */}
               <button
                 type="submit"
                 className="flex items-center gap-1 sm:gap-2 px-3 sm:px-6 md:px-8 py-2 sm:py-4 bg-yellow-500 hover:bg-yellow-400/95 text-black rounded-[22px] font-bold text-xs sm:text-sm md:text-base transition-colors duration-200 whitespace-nowrap flex-shrink-0 cursor-pointer"
@@ -310,7 +290,6 @@ export default function EstoquePage() {
                 <span className="hidden sm:inline">Buscar</span>
               </button>
 
-              {/* Botão Filtro */}
               <button
                 type="button"
                 onClick={() => setShowFilters(!showFilters)}
@@ -323,7 +302,6 @@ export default function EstoquePage() {
                 <Filter className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
               </button>
 
-              {/* Botão Limpar */}
               {(searchQuery || hasActiveFilters) && (
                 <button
                   type="button"
@@ -339,11 +317,9 @@ export default function EstoquePage() {
               )}
             </form>
 
-            {/* Painel de Filtros */}
             {showFilters && (
               <div className="bg-white/5 border border-white/20 rounded-[22px] p-4 sm:p-6 mt-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {/* Marca */}
                   <div>
                     <label className="block text-white/80 text-sm mb-2">Marca</label>
                     {loadingMarcas ? (
@@ -367,7 +343,6 @@ export default function EstoquePage() {
                     )}
                   </div>
 
-                  {/* Modelo */}
                   <div>
                     <label className="block text-white/80 text-sm mb-2">Modelo</label>
                     {loadingModelos ? (
@@ -391,7 +366,6 @@ export default function EstoquePage() {
                     )}
                   </div>
 
-                  {/* Ano De */}
                   <div>
                     <label className="block text-white/80 text-sm mb-2">Ano De</label>
                     <input
@@ -405,7 +379,6 @@ export default function EstoquePage() {
                     />
                   </div>
 
-                  {/* Ano Até */}
                   <div>
                     <label className="block text-white/80 text-sm mb-2">Ano Até</label>
                     <input
@@ -419,7 +392,6 @@ export default function EstoquePage() {
                     />
                   </div>
 
-                  {/* Preço De */}
                   <div>
                     <label className="block text-white/80 text-sm mb-2">Preço De (R$)</label>
                     <input
@@ -432,7 +404,6 @@ export default function EstoquePage() {
                     />
                   </div>
 
-                  {/* Preço Até */}
                   <div>
                     <label className="block text-white/80 text-sm mb-2">Preço Até (R$)</label>
                     <input
@@ -449,14 +420,12 @@ export default function EstoquePage() {
             )}
           </div>
 
-          {/* Error State */}
           {error && !loading && (
             <div className="bg-red-500/10 border border-red-500/50 rounded-lg p-6 mb-12">
               <p className="text-red-400 text-center">{error}</p>
             </div>
           )}
 
-          {/* Grid de Veículos */}
           {loading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
               {[...Array(6)].map((_, i) => (
@@ -470,17 +439,14 @@ export default function EstoquePage() {
               ))}
             </div>
           ) : searching ? (
-            // Mostrar skeleton sempre que estiver buscando
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
               {vehicles.length > 0 ? (
-                // Se já tem resultados, mostrar skeletons no lugar dos cards
                 <>
                   {[...Array(Math.min(vehicles.length, 6))].map((_, i) => (
                     <VehicleCardSkeleton key={`skeleton-${i}`} />
                   ))}
                 </>
               ) : (
-                // Se não tem resultados ainda, mostrar 6 skeletons
                 [...Array(6)].map((_, i) => (
                   <VehicleCardSkeleton key={i} />
                 ))
@@ -504,7 +470,6 @@ export default function EstoquePage() {
                     ))}
                   </div>
 
-                  {/* Paginação */}
                   {vehicles.length > PAGE_SIZE && (
                     <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 mb-8 sm:mb-12">
                       <p className="text-white/60 text-xs sm:text-sm order-2 sm:order-1">
@@ -563,7 +528,6 @@ export default function EstoquePage() {
             </>
           )}
 
-          {/* Formulário de Interesse */}
           <div className="mb-12">
             <VehicleInterestForm />
           </div>
@@ -573,3 +537,15 @@ export default function EstoquePage() {
   )
 }
 
+// 2. O export default principal envolve o conteúdo com o Suspense do React
+export default function EstoquePage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-[#00020C] flex items-center justify-center text-yellow-500">
+        Carregando página de estoque...
+      </div>
+    }>
+      <EstoqueContent />
+    </Suspense>
+  )
+}
