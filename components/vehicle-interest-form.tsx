@@ -80,7 +80,7 @@ export function VehicleInterestForm({
     <section
       className={
         withBackgroundImage
-          ? "relative min-h-[480px] sm:min-h-[520px] w-full overflow-hidden flex flex-col justify-center py-12 sm:py-20"
+          ? "relative min-h-[480px] sm:min-h-[520px] w-full overflow-hidden flex flex-col justify-center pb-12 sm:py-20"
           : "py-4 sm:py-20 bg-[#00020C]"
       }
     >
@@ -111,10 +111,10 @@ export function VehicleInterestForm({
         <div className="max-w-5xl mx-auto">
           {/* Header */}
           <div className="mb-8 md:mb-12">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl max-w-[670px] font-bold text-white mb-4">
-              Não encontrou o modelo que estava buscando?
+            <h2 className="text-2xl max-w-[290px] sm:text-3xl md:text-4xl lg:text-5xl sm:max-w-[670px] font-bold text-white mb-4">
+              Não encontrou o modelo que estava bduscando?
             </h2>
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/80">
+            <p className="text-sm max-w-[290px] sm:max-w-[670px] sm:text-base md:text-lg lg:text-xl text-white/80">
               Deixe agora o seu contato para ser notificado(a) quando chegar
             </p>
           </div>
@@ -243,7 +243,7 @@ export function VehicleInterestForm({
               <button
                 type="submit"
                 disabled={loading}
-                className="px-8 py-3 md:px-12 md:py-4 bg-yellow-500 hover:bg-yellow-400/95 disabled:opacity-10 disabled:cursor-not-allowed text-[#00020C] rounded-[22px] font-black text-lg sm:text-xl transition-colors duration-200  flex items-center gap-2 cursor-pointer"
+                className="w-full sm:w-auto h-12 min-w-[9rem] px-6 inline-flex items-center justify-center gap-2 rounded-[30em] bg-[var(--vb-yellow)] hover:bg-yellow-400/95 disabled:opacity-50 disabled:cursor-not-allowed text-[#00020C] text-[15px] font-bold uppercase tracking-wide transition-colors duration-200 cursor-pointer shadow-[6px_6px_12px_rgba(0,0,0,0.3),-2px_-2px_8px_rgba(255,255,255,0.05)] focus:outline-none focus:ring-2 focus:ring-amber-500/50"
               >
                 {loading && <Loader2 className="w-5 h-5 animate-spin" />}
                 {loading ? "ENVIANDO..." : "ENVIAR"}

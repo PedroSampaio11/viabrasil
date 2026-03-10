@@ -60,7 +60,7 @@ export function EstoqueSection() {
           <p className="text-sm sm:text-base md:text-lg text-white/80 max-w-xl">
             Escolha o modelo ideal para o seu estilo de vida.
           </p>
-          <p className="text-sm sm:text-base md:text-lg text-white/80 max-w-xl">
+          <p className="text-sm max-w-[320px] sm:max-w-full sm:text-base md:text-lg text-white/80 sm:max-w-xl">
             O propósito da Via Brasil é ser a melhor escolha em automóveis para
             seus clientes e fazer parte dos momentos especiais da sua vida.
           </p>
