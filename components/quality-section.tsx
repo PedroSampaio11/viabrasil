@@ -34,7 +34,7 @@ export function QualitySection() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#00020C]/95 via-[#00020C]/80 to-[#00020C]/40" />
       </div>
 
-      <div className="relative container mx-auto px-4 py-16 md:py-20">
+      <div className="relative container mx-auto px-4 pt-16 md:py-20">
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10 lg:gap-12 flex-1 max-w-6xl">
           {/* Coluna esquerda: badge, título, descrição e lista de features */}
           <motion.div
