@@ -18,6 +18,7 @@ const SOBRE_IMAGES = [
   "2021 Reforma finalizada_.webp",
   "2023 Expansão.webp",
   "2025 Reforma calçada_.webp",
+  "loja.webp",
 ]
 const TIMELINE = [
   {
@@ -55,6 +56,12 @@ const TIMELINE = [
     title: "Evolução em Cada Detalhe",
     body: "Em 2025, a Via Brasil realizou a reforma completa da calçada da loja, reforçando o compromisso com a experiência do cliente, acessibilidade e valorização do espaço urbano.",
     image: "/images/sobre/" + encodeURIComponent(SOBRE_IMAGES[5]),
+  },
+  {
+    year: "2026",
+    title: "Loja Atualizada para Você",
+    body: "Loja atualizada e repleta de novidades para atender vocês. A Via Brasil segue evoluindo para oferecer o melhor em compra e venda de veículos, com estrutura moderna e um time pronto para recebê-lo.",
+    image: "/images/sobre/" + encodeURIComponent(SOBRE_IMAGES[6]),
   },
 ]
 
