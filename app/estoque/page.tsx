@@ -1,16 +1,21 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { useSearchParams } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { VehicleCard } from "@/components/vehicle-card"
 import { VehicleInterestForm } from "@/components/vehicle-interest-form"
-import { Search, Filter, X, ChevronLeft, ChevronRight } from "lucide-react"
+import { Search, Filter, X, ChevronLeft, ChevronRight, ArrowUp, ArrowDown, ArrowUpDown, ChevronDown } from "lucide-react"
 import { mapVeiculoToCard, VehicleCardData } from "@/lib/utils/vehicle-mapper"
 import { VeiculoRetornoModel, MarcaModel, ModeloModel } from "@/lib/types/autocerto"
 import { SelectSearchable } from "@/components/ui/select-searchable"
 import { Skeleton } from "@/components/ui/skeleton"
 import { VehicleCardSkeleton } from "@/components/vehicle-card-skeleton"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 
 interface FilterState {
   marca: string
@@ -55,16 +60,55 @@ export default function EstoquePage() {
     precoAte: "",
   })
 
+  type SortOrder = "" | "preco_asc" | "preco_desc"
+  const [sortOrder, setSortOrder] = useState<SortOrder>("")
+  const [sortDropdownOpen, setSortDropdownOpen] = useState(false)
+  const [sortPopoverAlign, setSortPopoverAlign] = useState<"start" | "end">("end")
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 640px)")
+    const update = () => setSortPopoverAlign(mq.matches ? "start" : "end")
+    update()
+    mq.addEventListener("change", update)
+    return () => mq.removeEventListener("change", update)
+  }, [])
+
+  const sortOptions: { value: SortOrder; label: string; Icon: React.ComponentType<{ className?: string }> }[] = [
+    { value: "", label: "Ordenar", Icon: ArrowUpDown },
+    { value: "preco_desc", label: "Maior preço", Icon: ArrowUp },
+    { value: "preco_asc", label: "Menor preço", Icon: ArrowDown },
+  ]
+  const currentSortLabel = sortOptions.find((o) => o.value === sortOrder)?.label ?? "Ordenar"
+  const currentSortIcon = sortOptions.find((o) => o.value === sortOrder)?.Icon ?? ArrowUpDown
+
+  /** Converte preço formatado "R$ 50.000,00" em número para ordenação */
+  const parsePriceFromDisplay = (priceStr: string): number => {
+    const cleaned = priceStr.replace(/\s/g, "").replace("R$", "").replace(/\./g, "").replace(",", ".")
+    const num = parseFloat(cleaned)
+    return Number.isNaN(num) ? 0 : num
+  }
+
+  const sortedVehicles = useMemo(() => {
+    if (!sortOrder) return vehicles
+    const copy = [...vehicles]
+    if (sortOrder === "preco_asc") {
+      copy.sort((a, b) => parsePriceFromDisplay(a.price) - parsePriceFromDisplay(b.price))
+    } else {
+      copy.sort((a, b) => parsePriceFromDisplay(b.price) - parsePriceFromDisplay(a.price))
+    }
+    return copy
+  }, [vehicles, sortOrder])
+
   const PAGE_SIZE = 12
   const [currentPage, setCurrentPage] = useState(1)
-  const totalPages = Math.max(1, Math.ceil(vehicles.length / PAGE_SIZE))
+  const totalPages = Math.max(1, Math.ceil(sortedVehicles.length / PAGE_SIZE))
   const safePage = Math.min(Math.max(1, currentPage), totalPages)
-  const paginatedVehicles = vehicles.slice(
+  const paginatedVehicles = sortedVehicles.slice(
     (safePage - 1) * PAGE_SIZE,
     safePage * PAGE_SIZE
   )
-  const from = vehicles.length === 0 ? 0 : (safePage - 1) * PAGE_SIZE + 1
-  const to = Math.min(safePage * PAGE_SIZE, vehicles.length)
+  const from = sortedVehicles.length === 0 ? 0 : (safePage - 1) * PAGE_SIZE + 1
+  const to = Math.min(safePage * PAGE_SIZE, sortedVehicles.length)
 
   // Busca vinda do header (/?q=termo)
   useEffect(() => {
@@ -296,7 +340,7 @@ export default function EstoquePage() {
                     type="text"
                     {...register("searchQuery")}
                     placeholder="Digite e aperte para buscar (ex.: Jetta GLI 2020)"
-                    className="w-full pl-8 sm:pl-12 pr-2 sm:pr-4 py-2 sm:py-4 bg-white/7 border border-white/20 rounded-[22px] text-white placeholder-white/40 focus:outline-none focus:border-yellow-500 transition-colors text-xs sm:text-sm md:text-base"
+                    className="w-full h-9 sm:h-12 pl-8 sm:pl-12 pr-2 sm:pr-4 py-2 sm:py-3 bg-white/7 border border-white/20 rounded-[22px] text-white placeholder-white/40 focus:outline-none focus:border-yellow-500 transition-colors text-xs sm:text-sm md:text-base"
                   />
                 </div>
               </div>
@@ -304,11 +348,55 @@ export default function EstoquePage() {
               {/* Botão Buscar */}
               <button
                 type="submit"
-                className="flex items-center gap-1 sm:gap-2 px-3 sm:px-6 md:px-8 py-2 sm:py-4 bg-yellow-500 hover:bg-yellow-400/95 text-black rounded-[22px] font-bold text-xs sm:text-sm md:text-base transition-colors duration-200 whitespace-nowrap flex-shrink-0 cursor-pointer"
+                className="h-9 sm:h-12 flex items-center gap-1 sm:gap-2 px-3 sm:px-6 md:px-8 py-0 bg-yellow-500 hover:bg-yellow-400/95 text-black rounded-[22px] font-bold text-xs sm:text-sm md:text-base transition-colors duration-200 whitespace-nowrap flex-shrink-0 cursor-pointer"
               >
                 <Search className="w-4 h-4 sm:w-5 sm:h-5" />
                 <span className="hidden sm:inline">Buscar</span>
               </button>
+
+              {/* Ordenar por */}
+              <div className="flex items-center flex-shrink-0">
+                <Popover open={sortDropdownOpen} onOpenChange={setSortDropdownOpen}>
+                  <PopoverTrigger asChild>
+                    <button
+                      type="button"
+                      className="h-9 sm:h-12 pl-2 sm:pl-3 pr-2 rounded-[22px] bg-white/7 border border-white/20 text-white text-xs sm:text-sm focus:outline-none focus:border-yellow-500 cursor-pointer flex items-center gap-1.5 min-w-0 sm:min-w-[8rem] w-10 sm:w-auto justify-center sm:justify-start"
+                      aria-label="Ordenar por"
+                      aria-haspopup="listbox"
+                      aria-expanded={sortDropdownOpen}
+                    >
+                      {(() => {
+                        const Icon = currentSortIcon
+                        return <Icon className="w-4 h-4 shrink-0 text-white/70" aria-hidden />
+                      })()}
+                      <span className="flex-1 text-left hidden sm:inline">{currentSortLabel}</span>
+                      <ChevronDown className="w-4 h-4 shrink-0 opacity-70 hidden sm:block" aria-hidden />
+                    </button>
+                  </PopoverTrigger>
+                  <PopoverContent align={sortPopoverAlign} className="w-28 min-w-[11rem] p-1">
+                    <ul role="listbox" aria-label="Ordenar por" className="space-y-0.5">
+                      {sortOptions.map((opt) => (
+                        <li key={opt.value || "default"} role="option" aria-selected={sortOrder === opt.value}>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSortOrder(opt.value)
+                              setSortDropdownOpen(false)
+                            }}
+                            className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors cursor-pointer flex items-center gap-2 ${sortOrder === opt.value
+                              ? "bg-yellow-500 text-black"
+                              : "text-white hover:bg-white/10"
+                              }`}
+                          >
+                            <opt.Icon className="w-4 h-4 shrink-0 opacity-80" aria-hidden />
+                            {opt.label}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  </PopoverContent>
+                </Popover>
+              </div>
 
               {/* Botão Filtro */}
               <button
@@ -505,10 +593,10 @@ export default function EstoquePage() {
                   </div>
 
                   {/* Paginação */}
-                  {vehicles.length > PAGE_SIZE && (
+                  {sortedVehicles.length > PAGE_SIZE && (
                     <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 mb-8 sm:mb-12">
                       <p className="text-white/60 text-xs sm:text-sm order-2 sm:order-1">
-                        Mostrando {from} a {to} de {vehicles.length} veículos
+                        Mostrando {from} a {to} de {sortedVehicles.length} veículos
                       </p>
                       <div className="flex items-center gap-0.5 sm:gap-1 order-1 sm:order-2">
                         <button

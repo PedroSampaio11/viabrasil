@@ -8,7 +8,7 @@ import {
   Eye,
   Heart,
 } from "lucide-react"
-import { Marquee } from "@/components/ui/marquee"
+import { MarqueeDraggable } from "@/components/ui/marquee-draggable"
 
 // Nomes reais dos arquivos em public/images/sobre/ (com espaços e caracteres especiais)
 const SOBRE_IMAGES = [
@@ -422,7 +422,7 @@ export default function SobrePage() {
           </motion.div>
 
           <div className="w-full overflow-hidden">
-            <Marquee speed={30} pauseOnHover gap="1.5rem" className="py-2">
+            <MarqueeDraggable speed={40} pauseOnHover gap="1.5rem" className="py-2">
               {TEAM.map((person, i) => (
                 <div
                   key={`${person.name}-${i}`}
@@ -451,7 +451,7 @@ export default function SobrePage() {
                   </div>
                 </div>
               ))}
-            </Marquee>
+            </MarqueeDraggable>
           </div>
         </div>
       </section>
