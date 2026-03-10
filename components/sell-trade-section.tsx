@@ -44,7 +44,7 @@ export function SellTradeSection() {
           </p>
 
           {/* CTA Button */}
-          <AccentCtaButton href="/venda" ariaLabel="Cotar meu veículo">
+          <AccentCtaButton href="/venda" ariaLabel="Cotar meu veículo" className="w-full sm:w-auto">
             Cotar agora
           </AccentCtaButton>
         </motion.div>

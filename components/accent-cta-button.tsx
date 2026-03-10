@@ -24,7 +24,7 @@ export function AccentCtaButton({
     <Link
       href={href}
       className={cn(
-        "group relative inline-flex h-12 min-w-[9rem] w-full max-w-[20rem] items-center justify-center gap-3 overflow-hidden rounded-[30em] border-none bg-[var(--vb-yellow)] px-6 py-0 text-[15px] font-bold uppercase tracking-wide text-black shadow-[6px_6px_12px_rgba(0,0,0,0.3),-2px_-2px_8px_rgba(255,255,255,0.05)] focus:outline-none focus:ring-2 focus:ring-amber-500/50",
+        "group relative inline-flex h-12 min-w-[9rem] w-full max-w-none sm:max-w-[20rem] items-center justify-center gap-3 overflow-hidden rounded-[30em] border-none bg-[var(--vb-yellow)] px-6 py-0 text-[15px] font-bold uppercase tracking-wide text-black shadow-[6px_6px_12px_rgba(0,0,0,0.3),-2px_-2px_8px_rgba(255,255,255,0.05)] focus:outline-none focus:ring-2 focus:ring-amber-500/50",
         className
       )}
       aria-label={ariaLabel ?? undefined}
