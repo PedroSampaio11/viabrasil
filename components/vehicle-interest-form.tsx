@@ -112,7 +112,7 @@ export function VehicleInterestForm({
           {/* Header */}
           <div className="mb-8 md:mb-12">
             <h2 className="text-2xl max-w-[290px] sm:text-3xl md:text-4xl lg:text-5xl sm:max-w-[670px] font-bold text-white mb-4">
-              Não encontrou o modelo que estava bduscando?
+              Não encontrou o que estava buscando?
             </h2>
             <p className="text-sm max-w-[290px] sm:max-w-[670px] sm:text-base md:text-lg lg:text-xl text-white/80">
               Deixe agora o seu contato para ser notificado(a) quando chegar

@@ -7,8 +7,9 @@ import {
   Target,
   Eye,
   Heart,
+  X,
 } from "lucide-react"
-import { Marquee } from "@/components/ui/marquee"
+import { MarqueeDraggable } from "@/components/ui/marquee-draggable"
 
 // Nomes reais dos arquivos em public/images/sobre/ (com espaços e caracteres especiais)
 const SOBRE_IMAGES = [
@@ -18,6 +19,7 @@ const SOBRE_IMAGES = [
   "2021 Reforma finalizada_.webp",
   "2023 Expansão.webp",
   "2025 Reforma calçada_.webp",
+  "loja.webp",
 ]
 const TIMELINE = [
   {
@@ -55,6 +57,12 @@ const TIMELINE = [
     title: "Evolução em Cada Detalhe",
     body: "Em 2025, a Via Brasil realizou a reforma completa da calçada da loja, reforçando o compromisso com a experiência do cliente, acessibilidade e valorização do espaço urbano.",
     image: "/images/sobre/" + encodeURIComponent(SOBRE_IMAGES[5]),
+  },
+  {
+    year: "2026",
+    title: "Loja Atualizada para Você",
+    body: "Loja atualizada e repleta de novidades para atender vocês. A Via Brasil segue evoluindo para oferecer o melhor em compra e venda de veículos, com estrutura moderna e um time pronto para recebê-lo.",
+    image: "/images/sobre/" + encodeURIComponent(SOBRE_IMAGES[6]),
   },
 ]
 
@@ -152,8 +160,34 @@ function TimelineImage({ src, alt }: { src: string; alt: string }) {
 export default function SobrePage() {
   const [activeTimelineIndex, setActiveTimelineIndex] = useState(0)
   const [scrollProgress, setScrollProgress] = useState(0)
+  const [lightboxOpen, setLightboxOpen] = useState(false)
+  const [timelineSectionInView, setTimelineSectionInView] = useState(true)
   const itemRefs = useRef<(HTMLLIElement | null)[]>([])
   const sectionRef = useRef<HTMLElement | null>(null)
+
+  useEffect(() => {
+    const section = sectionRef.current
+    if (!section) return
+    const observer = new IntersectionObserver(
+      ([entry]) => setTimelineSectionInView(entry.isIntersecting),
+      { root: null, rootMargin: "0px", threshold: 0 }
+    )
+    observer.observe(section)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!lightboxOpen) return
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightboxOpen(false)
+    }
+    document.body.style.overflow = "hidden"
+    document.addEventListener("keydown", onKeyDown)
+    return () => {
+      document.body.style.overflow = ""
+      document.removeEventListener("keydown", onKeyDown)
+    }
+  }, [lightboxOpen])
 
   // Item ativo (qual descrição) + progresso contínuo do scroll (barra sobe/desce suave)
   useEffect(() => {
@@ -308,7 +342,7 @@ export default function SobrePage() {
               ))}
             </ul>
           </div>
-          <div className="sticky top-7 flex items-center sm:h-[660px] sm:w-full lg:top-8">
+          <div className="hidden sm:flex sticky top-7 items-center sm:h-[660px] sm:w-full lg:top-8">
             <div
               className="relative w-full py-8 sm:py-12 transition-transform duration-150 ease-out"
               style={{ transform: `translateY(-${scrollProgress * 48}px)` }}
@@ -348,6 +382,107 @@ export default function SobrePage() {
               />
             </div>
           </div>
+        </div>
+
+        {/* Mobile: preview flutuante + lightbox */}
+        <div className="sm:hidden">
+          <AnimatePresence>
+            {timelineSectionInView && (
+              <motion.button
+                type="button"
+                onClick={() => setLightboxOpen(true)}
+                className="fixed bottom-6 right-6 z-40 w-20 h-20 rounded-2xl overflow-hidden border-2 border-white/20 bg-white/5 shadow-lg shadow-black/40 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-[#00020C]"
+                aria-label={`Ver foto: ${TIMELINE[activeTimelineIndex].title}`}
+                animate={{ y: [0, -8, 0], opacity: 1 }}
+                transition={{
+                  y: { duration: 1.8, repeat: Infinity, repeatType: "reverse" },
+                }}
+                initial={{ opacity: 0, scale: 0.8 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+              >
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeTimelineIndex}
+                    className="absolute inset-0"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Image
+                      src={TIMELINE[activeTimelineIndex].image}
+                      alt={TIMELINE[activeTimelineIndex].title}
+                      fill
+                      className="object-cover"
+                      sizes="80px"
+                      unoptimized
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement
+                        if (target?.src !== TIMELINE_IMAGE_FALLBACK) target.src = TIMELINE_IMAGE_FALLBACK
+                      }}
+                    />
+                  </motion.div>
+                </AnimatePresence>
+              </motion.button>
+            )}
+          </AnimatePresence>
+
+          <AnimatePresence>
+            {lightboxOpen && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="fixed inset-0 z-50 bg-black/95 flex flex-col items-center justify-center p-4"
+                onClick={() => setLightboxOpen(false)}
+                role="dialog"
+                aria-modal="true"
+                aria-label="Foto da timeline"
+              >
+                <button
+                  type="button"
+                  onClick={() => setLightboxOpen(false)}
+                  className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                  aria-label="Fechar"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.25 }}
+                  className="relative w-full max-w-lg flex-1 flex flex-col items-center justify-center gap-4"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <span className="inline-block w-fit rounded-full border border-white/20 bg-white/10 text-[#CBD5E1] px-4 py-2 text-xs font-semibold uppercase tracking-wider">
+                    {TIMELINE[activeTimelineIndex].year}
+                  </span>
+                  <h3 className="text-xl font-bold text-amber-400 text-center sm:text-2xl">
+                    {TIMELINE[activeTimelineIndex].title}
+                  </h3>
+                  {/* <p className="text-sm leading-relaxed text-white/90 text-center sm:text-base">
+                    {TIMELINE[activeTimelineIndex].body}
+                  </p> */}
+                  <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 bg-white/5">
+                    <Image
+                      src={TIMELINE[activeTimelineIndex].image}
+                      alt={TIMELINE[activeTimelineIndex].title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 640px) 100vw, 512px"
+                      unoptimized
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement
+                        if (target?.src !== TIMELINE_IMAGE_FALLBACK) target.src = TIMELINE_IMAGE_FALLBACK
+                      }}
+                    />
+                  </div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </section>
 
@@ -422,7 +557,7 @@ export default function SobrePage() {
           </motion.div>
 
           <div className="w-full overflow-hidden">
-            <Marquee speed={30} pauseOnHover gap="1.5rem" className="py-2">
+            <MarqueeDraggable speed={40} pauseOnHover gap="1.5rem" className="py-2">
               {TEAM.map((person, i) => (
                 <div
                   key={`${person.name}-${i}`}
@@ -451,7 +586,7 @@ export default function SobrePage() {
                   </div>
                 </div>
               ))}
-            </Marquee>
+            </MarqueeDraggable>
           </div>
         </div>
       </section>
