@@ -1,9 +1,9 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
+import { useState, useEffect } from 'react';
 
-const SPLASH_DURATION_MS = 2200
-const FADE_OUT_MS = 600
+const SPLASH_DURATION_MS = 2200;
+const FADE_OUT_MS = 600;
 
 function LogoIcon() {
   return (
@@ -13,7 +13,7 @@ function LogoIcon() {
       viewBox="0 0 164 180"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="w-32 h-auto sm:w-40 md:w-48"
+      className="w-32 h-auto sm:w-40 md:w-48 overflow-visible"
       aria-hidden
     >
       <path
@@ -41,43 +41,44 @@ function LogoIcon() {
         fillOpacity="0.99"
       />
     </svg>
-  )
+  );
 }
 
 export function SplashScreen({ children }: { children: React.ReactNode }) {
-  const [phase, setPhase] = useState<"visible" | "exiting" | "done">("visible")
+  const [phase, setPhase] = useState<'visible' | 'exiting' | 'done'>('visible');
 
   useEffect(() => {
     const showTimer = setTimeout(() => {
-      setPhase("exiting")
-    }, SPLASH_DURATION_MS)
+      setPhase('exiting');
+    }, SPLASH_DURATION_MS);
 
     const doneTimer = setTimeout(() => {
-      setPhase("done")
-    }, SPLASH_DURATION_MS + FADE_OUT_MS)
+      setPhase('done');
+    }, SPLASH_DURATION_MS + FADE_OUT_MS);
 
     return () => {
-      clearTimeout(showTimer)
-      clearTimeout(doneTimer)
-    }
-  }, [])
+      clearTimeout(showTimer);
+      clearTimeout(doneTimer);
+    };
+  }, []);
 
-  if (phase === "done") {
-    return <>{children}</>
+  if (phase === 'done') {
+    return <>{children}</>;
   }
 
   return (
     <>
       <div
-        className={`fixed inset-0 z-[100] flex items-center justify-center bg-[#00020C] transition-opacity duration-500 ease-out ${phase === "exiting" ? "opacity-0 pointer-events-none" : "opacity-100"
-          }`}
-        aria-hidden={phase === "exiting"}
+        className={`fixed inset-0 z-[100] flex items-center justify-center bg-[#00020C] transition-opacity duration-500 ease-out ${
+          phase === 'exiting' ? 'opacity-0 pointer-events-none' : 'opacity-100'
+        }`}
+        aria-hidden={phase === 'exiting'}
       >
-        <div className="flex flex-col items-center justify-center gap-6 animate-splash-pulse">
+        <div className="flex flex-col items-center justify-center gap-6 p-4 sm:p-6 animate-splash-pulse">
           <LogoIcon />
         </div>
       </div>
       {children}
     </>
-  )
+  );
 }
