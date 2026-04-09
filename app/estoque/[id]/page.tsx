@@ -179,7 +179,7 @@ export default function VehicleDetailPage({ params }: { params: Promise<{ id: st
                 </div>
                 <div className="bg-white/5 rounded-lg p-4 border border-white/10">
                   <p className="text-white/60 text-xs sm:text-sm mb-1">Placa</p>
-                  <p className="text-white text-sm sm:text-base font-medium">{vehicleData.plate}</p>
+                  <p className="text-white text-sm sm:text-base font-medium">{vehicleData.plate ? vehicleData.plate.replace(/^.{3}/, '***') : '—'}</p>
                 </div>
                 <div className="bg-white/5 rounded-lg p-4 border border-white/10">
                   <p className="text-white/60 text-xs sm:text-sm mb-1">Câmbio</p>
