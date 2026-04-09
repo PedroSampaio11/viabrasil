@@ -38,8 +38,8 @@ const CONTACT_CARDS = [
       </svg>
     ),
     label: "Instagram",
-    value: "@viabrasil",
-    href: "https://instagram.com/viabrasil",
+    value: "@viabrasilautomoveis_",
+    href: "https://www.instagram.com/viabrasilautomoveis_/",
     colorClass: "text-orange-400",
     bgClass: "bg-orange-500/10 border-orange-500/30",
     iconBg: "bg-orange-500/20",

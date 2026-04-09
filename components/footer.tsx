@@ -50,7 +50,7 @@ export function Footer() {
               {/* Redes Sociais */}
               <div className="flex gap-4">
                 <a
-                  href="https://instagram.com/viabrasil"
+                  href="https://www.instagram.com/viabrasilautomoveis_/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:border-yellow-500 hover:bg-yellow-500/10 transition-all"

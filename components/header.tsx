@@ -5,6 +5,9 @@ import Link from "next/link"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { Search, Menu } from "lucide-react"
+import { getWhatsAppUrl } from "@/lib/utils/whatsapp"
+
+const CONSULTOR_URL = getWhatsAppUrl("Olá, vim pelo site e gostaria de falar com um vendedor.")
 import {
   Sheet,
   SheetContent,
@@ -127,11 +130,14 @@ export function Header() {
               >
                 Contato
               </Link>
-              <button
+              <a
+                href={CONSULTOR_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-6 py-2.5 bg-green-500 hover:bg-green-600 text-white rounded-full text-sm font-semibold transition-colors shadow-lg shadow-green-500/20"
               >
                 Falar com Consultor
-              </button>
+              </a>
             </div>
 
             {/* Menu Mobile com Sheet */}
@@ -183,11 +189,14 @@ export function Header() {
                   </Link>
 
                   {/* Botão CTA */}
-                  <button
-                    className="w-full mt-4 px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-full text-sm font-semibold transition-colors shadow-lg shadow-green-500/20"
+                  <a
+                    href={CONSULTOR_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full mt-4 px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-full text-sm font-semibold transition-colors shadow-lg shadow-green-500/20 text-center"
                   >
                     FALE COM CONSULTOR
-                  </button>
+                  </a>
                 </nav>
               </SheetContent>
             </Sheet>
